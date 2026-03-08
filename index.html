@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FLPR</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3Cfilter%20id%3D%27g%27%20x%3D%27-40%25%27%20y%3D%27-40%25%27%20width%3D%27180%25%27%20height%3D%27180%25%27%3E%0A%20%20%20%20%20%20%3CfeGaussianBlur%20stdDeviation%3D%273%27%20result%3D%27blur%27%2F%3E%0A%20%20%20%20%20%20%3CfeMerge%3E%3CfeMergeNode%20in%3D%27blur%27%2F%3E%3CfeMergeNode%20in%3D%27SourceGraphic%27%2F%3E%3C%2FfeMerge%3E%0A%20%20%20%20%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%2712%27%20fill%3D%27%230a0e1a%27%2F%3E%0A%20%20%3Ctext%20x%3D%2732%27%20y%3D%2750%27%20font-family%3D%27Arial%20Black%2Csans-serif%27%20font-size%3D%2752%27%20font-weight%3D%27900%27%0A%20%20%20%20text-anchor%3D%27middle%27%20fill%3D%27%23ff9500%27%20filter%3D%27url%28%23g%29%27%3EF%3C%2Ftext%3E%0A%3C%2Fsvg%3E"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
@@ -4617,7 +4618,7 @@ function HomeScreen({ profiles, onSelect, onNewProfile, onRenameWerkset, onRenam
   const envBg    = { production:"rgba(34,197,94,.1)", test:"rgba(245,158,11,.1)", acceptance:"rgba(59,130,246,.1)" };
   const envBorder= { production:"rgba(34,197,94,.2)", test:"rgba(245,158,11,.2)", acceptance:"rgba(59,130,246,.2)" };
   const envSub   = { production:"rest", test:"resttest", acceptance:"restaccept" };
-  const [renaming, setRenaming] = React.useState(null); // { kind:"werkset"|"profile", profileId, id, value }
+  const [renaming, setRenaming] = React.useState(null);
 
   // onSelect(profileId, werksetId) — caller decides what to do
   return (
@@ -4662,33 +4663,16 @@ function HomeScreen({ profiles, onSelect, onNewProfile, onRenameWerkset, onRenam
                 <span style={{ width:8, height:8, borderRadius:"50%", flexShrink:0,
                   background: envColor[et], boxShadow:`0 0 8px ${envColor[et]}` }} />
                 {renaming?.kind==="profile" && renaming.id===pr.id ? (
-                  <input
-                    autoFocus
-                    value={renaming.value}
+                  <input autoFocus value={renaming.value}
                     onChange={e => setRenaming(r => ({ ...r, value: e.target.value }))}
-                    onBlur={() => {
-                      const v = renaming.value.trim();
-                      if (v && onRenameProfile) onRenameProfile(pr.id, v);
-                      setRenaming(null);
-                    }}
-                    onKeyDown={e => {
-                      if (e.key === "Enter") e.target.blur();
-                      if (e.key === "Escape") setRenaming(null);
-                      e.stopPropagation();
-                    }}
+                    onBlur={() => { const v = renaming.value.trim(); if (v && onRenameProfile) onRenameProfile(pr.id, v); setRenaming(null); }}
+                    onKeyDown={e => { if (e.key==="Enter") e.target.blur(); if (e.key==="Escape") setRenaming(null); e.stopPropagation(); }}
                     onClick={e => e.stopPropagation()}
-                    style={{ flex:1, background:"rgba(200,168,75,.1)", border:"1px solid var(--chrome)",
-                      borderRadius:3, color:"var(--text-bright)", fontFamily:"'Bungee Inline',sans-serif",
-                      fontSize:".85rem", padding:".1rem .3rem", outline:"none", minWidth:0, letterSpacing:".03em" }}
-                  />
+                    style={{ flex:1, background:"rgba(200,168,75,.1)", border:"1px solid var(--chrome)", borderRadius:3, color:"var(--text-bright)", fontFamily:"'Bungee Inline',sans-serif", fontSize:".85rem", padding:".1rem .3rem", outline:"none", minWidth:0, letterSpacing:".03em" }} />
                 ) : (
-                  <span
-                    title="Dubbelklik om naam te wijzigen"
+                  <span title="Dubbelklik om naam te wijzigen"
                     onDoubleClick={e => { e.stopPropagation(); setRenaming({ kind:"profile", id:pr.id, value:pr.name }); }}
-                    style={{ fontFamily:"'Bungee Inline',sans-serif", fontSize:".85rem",
-                      color:"var(--text-bright)", flex:1, overflow:"hidden",
-                      textOverflow:"ellipsis", whiteSpace:"nowrap", letterSpacing:".03em",
-                      cursor:"text" }}>
+                    style={{ fontFamily:"'Bungee Inline',sans-serif", fontSize:".85rem", color:"var(--text-bright)", flex:1, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap", letterSpacing:".03em", cursor:"text" }}>
                     {pr.name}
                   </span>
                 )}
@@ -4727,32 +4711,16 @@ function HomeScreen({ profiles, onSelect, onNewProfile, onRenameWerkset, onRenam
                       <span style={{ width:5, height:5, borderRadius:"50%", flexShrink:0,
                         background:"var(--chrome-dim)" }} />
                       {renaming?.kind==="werkset" && renaming.id===w.id ? (
-                        <input
-                          autoFocus
-                          value={renaming.value}
+                        <input autoFocus value={renaming.value}
                           onChange={e => setRenaming(r => ({ ...r, value: e.target.value }))}
-                          onBlur={() => {
-                            const v = renaming.value.trim();
-                            if (v && onRenameWerkset) onRenameWerkset(pr.id, w.id, v);
-                            setRenaming(null);
-                          }}
-                          onKeyDown={e => {
-                            if (e.key === "Enter") e.target.blur();
-                            if (e.key === "Escape") setRenaming(null);
-                            e.stopPropagation();
-                          }}
+                          onBlur={() => { const v = renaming.value.trim(); if (v && onRenameWerkset) onRenameWerkset(pr.id, w.id, v); setRenaming(null); }}
+                          onKeyDown={e => { if (e.key==="Enter") e.target.blur(); if (e.key==="Escape") setRenaming(null); e.stopPropagation(); }}
                           onClick={e => e.stopPropagation()}
-                          style={{ flex:1, background:"rgba(255,149,0,.08)", border:"1px solid var(--neon-amber)",
-                            borderRadius:3, color:"var(--text-bright)", fontFamily:"var(--sans)",
-                            fontSize:".72rem", fontWeight:600, padding:".1rem .3rem", outline:"none", minWidth:0 }}
-                        />
+                          style={{ flex:1, background:"rgba(255,149,0,.08)", border:"1px solid var(--neon-amber)", borderRadius:3, color:"var(--text-bright)", fontFamily:"var(--sans)", fontSize:".72rem", fontWeight:600, padding:".1rem .3rem", outline:"none", minWidth:0 }} />
                       ) : (
-                        <span
-                          title="Dubbelklik om naam te wijzigen"
-                          onDoubleClick={e => { e.stopPropagation(); setRenaming({ kind:"werkset", profileId:pr.id, id:w.id, value:w.name }); }}
-                          style={{ flex:1, fontSize:".72rem", fontWeight:600, color:"var(--text-bright)",
-                            overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap",
-                            fontFamily:"var(--sans)", letterSpacing:".02em", cursor:"text" }}>
+                        <span title="Dubbelklik om naam te wijzigen"
+                          onDoubleClick={e => { e.stopPropagation(); setRenaming({ kind:"werkset", id:w.id, profileId:pr.id, value:w.name }); }}
+                          style={{ flex:1, fontSize:".72rem", fontWeight:600, color:"var(--text-bright)", overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap", fontFamily:"var(--sans)", letterSpacing:".02em", cursor:"text" }}>
                           {w.name}
                         </span>
                       )}
@@ -4803,19 +4771,21 @@ function HomeScreen({ profiles, onSelect, onNewProfile, onRenameWerkset, onRenam
         </div>
       </div>
 
-      {/* Backup knop */}
+      {/* Backup knop — onder de grid */}
       <div onClick={onExport}
-        style={{ fontSize:".62rem", color:"var(--chrome-dim)", cursor:"pointer",
-          fontFamily:"var(--mono)", letterSpacing:".06em", textTransform:"uppercase",
-          padding:".25rem .6rem", borderRadius:3, border:"1px solid rgba(200,168,75,.15)",
-          transition:"all .12s", marginTop:".2rem" }}
-        onMouseEnter={e=>{ e.currentTarget.style.color="var(--neon-amber)"; e.currentTarget.style.borderColor="rgba(200,168,75,.4)"; }}
-        onMouseLeave={e=>{ e.currentTarget.style.color="var(--chrome-dim)"; e.currentTarget.style.borderColor="rgba(200,168,75,.15)"; }}>
-        📦 Backup exporteren / importeren
+        style={{ marginTop:".5rem", width:"100%", maxWidth:900, textAlign:"center",
+          padding:".35rem 1rem", fontSize:".6rem", color:"var(--chrome-dim)", cursor:"pointer",
+          fontFamily:"var(--mono)", letterSpacing:".07em", textTransform:"uppercase",
+          border:"1px solid rgba(200,168,75,.12)", borderRadius:3, transition:"all .12s" }}
+        onMouseEnter={e=>{ e.currentTarget.style.color="var(--neon-amber)"; e.currentTarget.style.borderColor="rgba(200,168,75,.35)"; }}
+        onMouseLeave={e=>{ e.currentTarget.style.color="var(--chrome-dim)"; e.currentTarget.style.borderColor="rgba(200,168,75,.12)"; }}>
+        Backup exporteren / importeren
       </div>
     </div>
   );
-}({ onConnect, onCancel }) {
+}
+
+function SetupScreen({ onConnect, onCancel }) {
   const [step, setStep]         = useState(1);
   const [env, setEnv]           = useState("");
   const [envType, setEnvType]   = useState("production");
@@ -5897,217 +5867,122 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-// ── Export / Import Modal ──────────────────────────────────────────────────────
+// ── Export / Import Modal ─────────────────────────────────────────────────
 function ExportImportModal({ profiles, onImport, onClose }) {
-  const [tab,        setTab]        = React.useState("export"); // "export" | "import"
+  const [tab,        setTab]        = React.useState("export");
   const [maskTokens, setMaskTokens] = React.useState(true);
   const [importText, setImportText] = React.useState("");
-  const [importMode, setImportMode] = React.useState("merge"); // "merge" | "replace"
+  const [importMode, setImportMode] = React.useState("merge");
   const [importErr,  setImportErr]  = React.useState(null);
   const [importOk,   setImportOk]   = React.useState(null);
   const fileRef = React.useRef(null);
 
-  // ── Export ────────────────────────────────────────────────────────────────
-  const buildExport = () => {
-    const data = profiles.map(p => ({
+  const buildExport = () => ({
+    _flpr: "backup", _version: 1,
+    _exportedAt: new Date().toISOString(),
+    _tokensMasked: maskTokens,
+    profiles: profiles.map(p => ({
       ...p,
-      config: maskTokens
-        ? { ...p.config, token: "••••••••••••••••" }
-        : p.config,
-      // run history weglaten: kan groot zijn en is niet nodig voor backup
-      werksets: (p.werksets || []).map(w => ({
-        id: w.id, name: w.name, schedule: w.schedule,
-        connectors: w.connectors || []
-      }))
-    }));
-    return {
-      _flpr: "backup",
-      _version: 1,
-      _exportedAt: new Date().toISOString(),
-      _tokensMasked: maskTokens,
-      profiles: data
-    };
-  };
+      config: maskTokens ? { ...p.config, token: "MASKED" } : p.config,
+      werksets: (p.werksets||[]).map(w => ({ id:w.id, name:w.name, schedule:w.schedule, connectors:w.connectors||[] }))
+    }))
+  });
 
   const handleExport = () => {
-    const obj  = buildExport();
-    const json = JSON.stringify(obj, null, 2);
-    const blob = new Blob([json], { type: "application/json" });
-    const url  = URL.createObjectURL(blob);
-    const a    = document.createElement("a");
-    const ts   = new Date().toISOString().slice(0,10);
-    a.href     = url;
-    a.download = `flpr-backup-${ts}.json`;
+    const json = JSON.stringify(buildExport(), null, 2);
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([json], { type:"application/json" }));
+    a.download = "flpr-backup-" + new Date().toISOString().slice(0,10) + ".json";
     a.click();
-    URL.revokeObjectURL(url);
   };
 
-  // ── Import ────────────────────────────────────────────────────────────────
-  const handleFileLoad = (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = ev => setImportText(ev.target.result || "");
-    reader.readAsText(file);
-    setImportErr(null); setImportOk(null);
+  const handleFileLoad = e => {
+    const file = e.target.files?.[0]; if (!file) return;
+    const r = new FileReader();
+    r.onload = ev => { setImportText(ev.target.result||""); setImportErr(null); setImportOk(null); };
+    r.readAsText(file);
   };
 
-  const handleImport = () => {
+  const doImport = () => {
     setImportErr(null); setImportOk(null);
     let parsed;
-    try { parsed = JSON.parse(importText); } catch {
-      setImportErr("Ongeldig JSON-bestand."); return;
-    }
-    if (parsed._flpr !== "backup" || !Array.isArray(parsed.profiles)) {
-      setImportErr("Dit is geen geldig FLPR backup-bestand."); return;
-    }
-    if (parsed._tokensMasked) {
-      setImportErr("Tokens zijn gemaskeerd in dit bestand — verbindingen moeten handmatig opnieuw worden ingesteld na import."); return;
-    }
-    const incoming = parsed.profiles;
-    if (!incoming.length) { setImportErr("Geen profielen gevonden in het bestand."); return; }
-    onImport(incoming, importMode);
-    setImportOk(`${incoming.length} profiel(en) geïmporteerd.`);
+    try { parsed = JSON.parse(importText); } catch(e2) { setImportErr("Ongeldig JSON-bestand."); return; }
+    if (parsed._flpr !== "backup" || !Array.isArray(parsed.profiles)) { setImportErr("Geen geldig FLPR backup-bestand."); return; }
+    if (parsed._tokensMasked) { setImportErr("Tokens zijn gemaskeerd in dit bestand. Verbindingen opnieuw instellen na import."); return; }
+    if (!parsed.profiles.length) { setImportErr("Geen profielen gevonden."); return; }
+    onImport(parsed.profiles, importMode);
+    setImportOk(parsed.profiles.length + " profiel(en) geimporteerd.");
   };
 
-  const exportObj    = buildExport();
-  const profileCount = exportObj.profiles.length;
-  const werksetCount = exportObj.profiles.reduce((s,p) => s + (p.werksets?.length||0), 0);
-  const connCount    = exportObj.profiles.reduce((s,p) =>
-    s + (p.werksets||[]).reduce((ss,w) => ss + (w.connectors?.length||0), 0), 0);
+  const ex = buildExport();
+  const pc = ex.profiles.length;
+  const wc = ex.profiles.reduce((s,p)=>s+(p.werksets?.length||0),0);
+  const cc = ex.profiles.reduce((s,p)=>s+(p.werksets||[]).reduce((ss,w)=>ss+(w.connectors?.length||0),0),0);
 
   return (
-    <div className="overlay" onClick={e => e.target===e.currentTarget && onClose()}>
-      <div className="modal" style={{ width:520 }}>
+    <div className="overlay" onClick={e=>e.target===e.currentTarget&&onClose()}>
+      <div className="modal" style={{width:500}}>
         <div className="mh">
-          <div className="mtitle">📦 Backup & Herstel</div>
-          <div className="mclose" onClick={onClose}>✕</div>
+          <div className="mtitle">Backup &amp; Herstel</div>
+          <div className="mclose" onClick={onClose}>X</div>
         </div>
-
-        {/* Tabs */}
-        <div style={{ display:"flex", borderBottom:"1px solid var(--b1)", background:"var(--s1)" }}>
-          {[["export","⬇ Exporteren"],["import","⬆ Importeren"]].map(([k,lbl]) => (
+        <div style={{display:"flex",borderBottom:"1px solid var(--b1)"}}>
+          {[["export","Exporteren"],["import","Importeren"]].map(([k,lbl])=>(
             <div key={k} onClick={()=>setTab(k)}
-              style={{ padding:".55rem 1.1rem", fontSize:".72rem", fontWeight:600, cursor:"pointer",
-                fontFamily:"var(--mono)", letterSpacing:".06em", textTransform:"uppercase",
-                color: tab===k ? "var(--neon-amber)" : "var(--t3)",
-                borderBottom: tab===k ? "2px solid var(--neon-amber)" : "2px solid transparent",
-                transition:"color .12s" }}>
+              style={{padding:".5rem 1rem",fontSize:".72rem",fontWeight:600,cursor:"pointer",
+                fontFamily:"var(--mono)",letterSpacing:".06em",textTransform:"uppercase",
+                color:tab===k?"var(--neon-amber)":"var(--t3)",
+                borderBottom:tab===k?"2px solid var(--neon-amber)":"2px solid transparent"}}>
               {lbl}
             </div>
           ))}
         </div>
-
-        <div className="mb" style={{ display:"flex", flexDirection:"column", gap:".8rem" }}>
-
-          {tab === "export" && (<>
-
-            {/* Samenvatting */}
-            <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:".5rem" }}>
-              {[[profileCount,"profielen","var(--neon-amber)"],[werksetCount,"werksets","var(--neon-cyan)"],[connCount,"connectors","var(--neon-green)"]].map(([n,lbl,col]) => (
-                <div key={lbl} style={{ background:"var(--s2)", border:"1px solid var(--b1)", borderRadius:4,
-                  padding:".5rem .7rem", textAlign:"center" }}>
-                  <div style={{ fontFamily:"var(--mono)", fontSize:"1.3rem", fontWeight:700, color:col,
-                    textShadow:`0 0 10px ${col}` }}>{n}</div>
-                  <div style={{ fontSize:".6rem", color:"var(--t3)", letterSpacing:".06em",
-                    textTransform:"uppercase", fontFamily:"var(--mono)" }}>{lbl}</div>
+        <div className="mb" style={{display:"flex",flexDirection:"column",gap:".8rem"}}>
+          {tab==="export" && (<>
+            <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:".5rem"}}>
+              {[[pc,"profielen","var(--neon-amber)"],[wc,"werksets","var(--neon-cyan)"],[cc,"connectors","var(--neon-green)"]].map(([n,lbl,col])=>(
+                <div key={lbl} style={{background:"var(--s2)",border:"1px solid var(--b1)",borderRadius:4,padding:".5rem",textAlign:"center"}}>
+                  <div style={{fontFamily:"var(--mono)",fontSize:"1.2rem",fontWeight:700,color:col}}>{n}</div>
+                  <div style={{fontSize:".6rem",color:"var(--t3)",textTransform:"uppercase",fontFamily:"var(--mono)"}}>{lbl}</div>
                 </div>
               ))}
             </div>
-
-            {/* Token optie */}
-            <div style={{ display:"flex", alignItems:"center", gap:".65rem",
-              background:"var(--s2)", border:"1px solid var(--b1)", borderRadius:4,
-              padding:".6rem .8rem" }}>
+            <div style={{display:"flex",alignItems:"center",gap:".65rem",background:"var(--s2)",border:"1px solid var(--b1)",borderRadius:4,padding:".6rem .8rem"}}>
               <Toggle value={maskTokens} onChange={setMaskTokens} label="" />
               <div>
-                <div style={{ fontSize:".72rem", fontWeight:600, color:"var(--t1)" }}>
-                  Tokens maskeren
-                </div>
-                <div style={{ fontSize:".62rem", color:"var(--t3)" }}>
-                  {maskTokens
-                    ? "Veilig — app tokens worden NIET meegenomen in de export"
-                    : "⚠ Tokens worden in plaintext meegenomen — bewaar dit bestand veilig"}
-                </div>
+                <div style={{fontSize:".72rem",fontWeight:600,color:"var(--t1)"}}>Tokens maskeren (aanbevolen)</div>
+                <div style={{fontSize:".62rem",color:"var(--t3)"}}>{maskTokens?"Veilig: tokens worden NIET meegenomen":"Tokens worden meegenomen in plaintext"}</div>
               </div>
             </div>
-
-            {!maskTokens && (
-              <div className="notice n-red" style={{ fontSize:".68rem" }}>
-                <strong>Let op:</strong> een export met tokens is gevoelig. Bewaar dit bestand op een beveiligde locatie en deel het niet via e-mail of chat.
-              </div>
-            )}
-
-            <div className="notice n-blue" style={{ fontSize:".67rem" }}>
-              Run-historie wordt niet meegenomen in de export — alleen profielen, werksets en connectors.
-            </div>
-
-            <button className="btn btn-primary" style={{ alignSelf:"flex-start" }} onClick={handleExport}>
-              ⬇ Download backup-bestand
-            </button>
-
+            {!maskTokens && <div className="notice n-red" style={{fontSize:".68rem"}}>Let op: bewaar dit bestand op een veilige locatie.</div>}
+            <div className="notice n-blue" style={{fontSize:".67rem"}}>Run-historie wordt niet meegenomen in de export.</div>
+            <button className="btn btn-primary" style={{alignSelf:"flex-start"}} onClick={handleExport}>Backup downloaden</button>
           </>)}
-
-          {tab === "import" && (<>
-
-            <div className="notice n-blue" style={{ fontSize:".67rem" }}>
-              Importeer een eerder geëxporteerd FLPR backup-bestand (.json). Bestanden met gemaskeerde tokens kunnen niet worden geïmporteerd — verbindingen moeten dan handmatig opnieuw worden ingesteld.
-            </div>
-
-            {/* Bestand kiezen */}
+          {tab==="import" && (<>
+            <div className="notice n-blue" style={{fontSize:".67rem"}}>Importeer een eerder geexporteerd FLPR backup-bestand. Bestanden met gemaskeerde tokens kunnen niet worden geimporteerd.</div>
             <div>
-              <div className="flbl" style={{ marginBottom:".35rem" }}>Backup-bestand kiezen</div>
-              <div style={{ display:"flex", gap:".5rem", alignItems:"center" }}>
-                <input ref={fileRef} type="file" accept=".json,application/json"
-                  onChange={handleFileLoad}
-                  style={{ display:"none" }} />
-                <button className="btn btn-ghost" onClick={()=>fileRef.current?.click()}>
-                  📂 Bestand kiezen…
-                </button>
-                {importText && (
-                  <span style={{ fontSize:".67rem", color:"var(--neon-green)", fontFamily:"var(--mono)" }}>
-                    ✓ bestand geladen ({(importText.length/1024).toFixed(1)} KB)
-                  </span>
-                )}
+              <div className="flbl" style={{marginBottom:".35rem"}}>Bestand kiezen</div>
+              <input ref={fileRef} type="file" accept=".json" onChange={handleFileLoad} style={{display:"none"}} />
+              <div style={{display:"flex",gap:".5rem",alignItems:"center"}}>
+                <button className="btn btn-ghost" onClick={()=>fileRef.current&&fileRef.current.click()}>Bestand kiezen...</button>
+                {importText && <span style={{fontSize:".67rem",color:"var(--neon-green)",fontFamily:"var(--mono)"}}>{(importText.length/1024).toFixed(1)} KB geladen</span>}
               </div>
             </div>
-
-            {/* Import mode */}
             <div>
-              <div className="flbl" style={{ marginBottom:".35rem" }}>Importmodus</div>
-              <div style={{ display:"flex", gap:".5rem" }}>
-                {[["merge","Samenvoegen"],["replace","Vervangen"]].map(([v,lbl]) => (
-                  <button key={v} onClick={()=>setImportMode(v)}
-                    className={`btn ${importMode===v?"btn-primary":"btn-ghost"}`}
-                    style={{ fontSize:".68rem" }}>
-                    {lbl}
-                  </button>
+              <div className="flbl" style={{marginBottom:".35rem"}}>Importmodus</div>
+              <div style={{display:"flex",gap:".5rem"}}>
+                {[["merge","Samenvoegen"],["replace","Vervangen"]].map(([v,lbl])=>(
+                  <button key={v} onClick={()=>setImportMode(v)} className={"btn " + (importMode===v?"btn-primary":"btn-ghost")} style={{fontSize:".68rem"}}>{lbl}</button>
                 ))}
               </div>
-              <div style={{ fontSize:".62rem", color:"var(--t3)", marginTop:".3rem" }}>
-                {importMode === "merge"
-                  ? "Geïmporteerde profielen worden toegevoegd naast bestaande profielen. Duplicaten (zelfde ID) worden overgeslagen."
-                  : "⚠ Alle huidige profielen worden verwijderd en vervangen door de geïmporteerde profielen."}
-              </div>
+              <div style={{fontSize:".62rem",color:"var(--t3)",marginTop:".3rem"}}>{importMode==="merge"?"Voegt profielen toe naast bestaande.":"Verwijdert en vervangt alle huidige profielen."}</div>
             </div>
-
-            {importMode === "replace" && (
-              <div className="notice n-red" style={{ fontSize:".67rem" }}>
-                <strong>Waarschuwing:</strong> dit verwijdert al je huidige profielen, werksets en connectoren. Dit is niet ongedaan te maken.
-              </div>
-            )}
-
-            {importErr  && <div className="notice n-red"  style={{ fontSize:".7rem" }}>{importErr}</div>}
-            {importOk   && <div className="notice n-green" style={{ fontSize:".7rem" }}>✓ {importOk}</div>}
-
-            <button className="btn btn-primary" disabled={!importText}
-              style={{ alignSelf:"flex-start" }} onClick={handleImport}>
-              ⬆ Importeren
-            </button>
-
+            {importMode==="replace" && <div className="notice n-red" style={{fontSize:".67rem"}}>Waarschuwing: dit verwijdert al je huidige profielen. Niet ongedaan te maken.</div>}
+            {importErr && <div className="notice n-red"  style={{fontSize:".7rem"}}>{importErr}</div>}
+            {importOk  && <div className="notice n-green" style={{fontSize:".7rem"}}>{importOk}</div>}
+            <button className="btn btn-primary" disabled={!importText} style={{alignSelf:"flex-start"}} onClick={doImport}>Importeren</button>
           </>)}
         </div>
-
         <div className="mf">
           <button className="btn btn-ghost" onClick={onClose}>Sluiten</button>
         </div>
@@ -6286,10 +6161,10 @@ function App() {
   const [activeId, setActiveId]                   = useState(null);
   const [showAdd, setShowAdd]                     = useState(false);
   const [showEdit, setShowEdit]                   = useState(null);
-  const [showExport, setShowExport]               = useState(false); // export/import modal
   const [showEditProfile, setShowEditProfile]     = useState(false);
-  const [renamingWerkset, setRenamingWerkset]     = useState(null); // {id, value}
-  const [renamingProfile, setRenamingProfile]     = useState(null); // {id, value} (HomeScreen)
+  const [renamingWerkset, setRenamingWerkset]     = useState(null);
+  const [renamingProfile, setRenamingProfile]     = useState(null);
+  const [showExport, setShowExport]               = useState(false);
   const [page, setPage]                           = useState(() => profiles.length > 0 ? "home" : "setup");
 
   useEffect(() => {
@@ -6331,11 +6206,9 @@ function App() {
       setProfiles(incoming);
       setActiveProfileId(incoming[0]?.id || null);
     } else {
-      // merge: voeg toe, sla duplicaten (zelfde id) over
       setProfiles(prev => {
-        const existingIds = new Set(prev.map(p => p.id));
-        const nieuweProfielen = incoming.filter(p => !existingIds.has(p.id));
-        return [...prev, ...nieuweProfielen];
+        const ids = new Set(prev.map(p => p.id));
+        return [...prev, ...incoming.filter(p => !ids.has(p.id))];
       });
     }
   };
@@ -6560,8 +6433,8 @@ function App() {
             setPage("editor");
           }}
           onNewProfile={()=>setPage("setup")}
-          onRenameWerkset={(pid, wid, newName) => patchWerkset(pid, wid, () => ({ name: newName }))}
-          onRenameProfile={(pid, newName) => patchProfile(pid, () => ({ name: newName }))}
+          onRenameWerkset={(pid,wid,n)=>patchWerkset(pid,wid,()=>({name:n}))}
+          onRenameProfile={(pid,n)=>patchProfile(pid,()=>({name:n}))}
           onExport={()=>setShowExport(true)}
         />
         : page==="settings"
@@ -6608,30 +6481,16 @@ function App() {
                           : isActive ? "0 0 6px var(--neon-cyan)" : "none",
                         animation: running ? "blink 1s infinite" : "none" }} />
                       {renamingWerkset?.id === w.id ? (
-                        <input
-                          autoFocus
-                          value={renamingWerkset.value}
+                        <input autoFocus value={renamingWerkset.value}
                           onChange={e => setRenamingWerkset(r => ({ ...r, value: e.target.value }))}
-                          onBlur={() => {
-                            const v = renamingWerkset.value.trim();
-                            if (v) patchWerkset(activeProfile?.id, w.id, () => ({ name: v }));
-                            setRenamingWerkset(null);
-                          }}
-                          onKeyDown={e => {
-                            if (e.key === "Enter") { e.target.blur(); }
-                            if (e.key === "Escape") { setRenamingWerkset(null); }
-                            e.stopPropagation();
-                          }}
+                          onBlur={() => { const v = renamingWerkset.value.trim(); if (v) patchWerkset(activeProfile?.id, w.id, () => ({ name: v })); setRenamingWerkset(null); }}
+                          onKeyDown={e => { if (e.key==="Enter") e.target.blur(); if (e.key==="Escape") setRenamingWerkset(null); e.stopPropagation(); }}
                           onClick={e => e.stopPropagation()}
-                          style={{ flex:1, background:"rgba(0,229,255,.08)", border:"1px solid var(--neon-cyan)",
-                            borderRadius:3, color:"var(--neon-cyan)", fontFamily:"var(--sans)", fontWeight:700,
-                            fontSize:".72rem", padding:".1rem .3rem", outline:"none", minWidth:0 }}
-                        />
+                          style={{ flex:1, background:"rgba(0,229,255,.08)", border:"1px solid var(--neon-cyan)", borderRadius:3, color:"var(--neon-cyan)", fontFamily:"var(--sans)", fontWeight:700, fontSize:".72rem", padding:".1rem .3rem", outline:"none", minWidth:0 }} />
                       ) : (
-                        <span className="si-name" title={`${w.name} — dubbelklik om te hernoemen`}
+                        <span className="si-name" title={w.name + " — dubbelklik om te hernoemen"}
                           onDoubleClick={e => { e.stopPropagation(); setRenamingWerkset({ id: w.id, value: w.name || "" }); }}
-                          style={{ flex:1, color: isActive ? "var(--neon-cyan)" : "var(--text-dim)",
-                            fontFamily:"var(--sans)", fontWeight: isActive ? 700 : 400 }}>
+                          style={{ flex:1, color: isActive ? "var(--neon-cyan)" : "var(--text-dim)", fontFamily:"var(--sans)", fontWeight: isActive ? 700 : 400 }}>
                           {w.name || "Standaard"}
                         </span>
                       )}
@@ -6792,30 +6651,15 @@ function App() {
                     background: config?.envType==="production" ? "var(--green)" : config?.envType==="test" ? "var(--amber)" : "var(--accent)" }} />
                   <div style={{ flex:1, minWidth:0 }}>
                     {renamingProfile?.id === activeProfile?.id ? (
-                      <input
-                        autoFocus
-                        value={renamingProfile.value}
+                      <input autoFocus value={renamingProfile.value}
                         onChange={e => setRenamingProfile(r => ({ ...r, value: e.target.value }))}
-                        onBlur={() => {
-                          const v = renamingProfile.value.trim();
-                          if (v) patchProfile(activeProfile.id, () => ({ name: v }));
-                          setRenamingProfile(null);
-                        }}
-                        onKeyDown={e => {
-                          if (e.key === "Enter") e.target.blur();
-                          if (e.key === "Escape") setRenamingProfile(null);
-                          e.stopPropagation();
-                        }}
-                        style={{ width:"100%", background:"rgba(200,168,75,.1)", border:"1px solid var(--chrome)",
-                          borderRadius:3, color:"var(--t1)", fontWeight:600, fontSize:".72rem",
-                          padding:".1rem .3rem", outline:"none", fontFamily:"var(--sans)" }}
-                      />
+                        onBlur={() => { const v = renamingProfile.value.trim(); if (v) patchProfile(activeProfile.id, () => ({ name: v })); setRenamingProfile(null); }}
+                        onKeyDown={e => { if (e.key==="Enter") e.target.blur(); if (e.key==="Escape") setRenamingProfile(null); e.stopPropagation(); }}
+                        style={{ width:"100%", background:"rgba(200,168,75,.1)", border:"1px solid var(--chrome)", borderRadius:3, color:"var(--t1)", fontWeight:600, fontSize:".72rem", padding:".1rem .3rem", outline:"none", fontFamily:"var(--sans)" }} />
                     ) : (
-                      <div
-                        title="Dubbelklik om naam te wijzigen"
+                      <div title="Dubbelklik om naam te wijzigen"
                         onDoubleClick={() => setRenamingProfile({ id: activeProfile?.id, value: activeProfile?.name || "" })}
-                        style={{ fontSize:".72rem", fontWeight:600, color:"var(--t1)",
-                          overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap", cursor:"text" }}>
+                        style={{ fontSize:".72rem", fontWeight:600, color:"var(--t1)", overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap", cursor:"text" }}>
                         {activeProfile?.name || config?.env}
                       </div>
                     )}
@@ -6841,31 +6685,16 @@ function App() {
                     <span style={{ width:6, height:6, borderRadius:"50%", flexShrink:0,
                       background: pr.config?.envType==="production" ? "var(--green)" : pr.config?.envType==="test" ? "var(--amber)" : "var(--accent)" }} />
                     {renamingProfile?.id === pr.id ? (
-                      <input
-                        autoFocus
-                        value={renamingProfile.value}
+                      <input autoFocus value={renamingProfile.value}
                         onChange={e => setRenamingProfile(r => ({ ...r, value: e.target.value }))}
-                        onBlur={() => {
-                          const v = renamingProfile.value.trim();
-                          if (v) patchProfile(pr.id, () => ({ name: v }));
-                          setRenamingProfile(null);
-                        }}
-                        onKeyDown={e => {
-                          if (e.key === "Enter") e.target.blur();
-                          if (e.key === "Escape") setRenamingProfile(null);
-                          e.stopPropagation();
-                        }}
+                        onBlur={() => { const v = renamingProfile.value.trim(); if (v) patchProfile(pr.id, () => ({ name: v })); setRenamingProfile(null); }}
+                        onKeyDown={e => { if (e.key==="Enter") e.target.blur(); if (e.key==="Escape") setRenamingProfile(null); e.stopPropagation(); }}
                         onClick={e => e.stopPropagation()}
-                        style={{ flex:1, background:"rgba(200,168,75,.1)", border:"1px solid var(--chrome)",
-                          borderRadius:3, color:"var(--t2)", fontSize:".7rem",
-                          padding:".1rem .3rem", outline:"none", fontFamily:"var(--sans)" }}
-                      />
+                        style={{ flex:1, background:"rgba(200,168,75,.1)", border:"1px solid var(--chrome)", borderRadius:3, color:"var(--t2)", fontSize:".7rem", padding:".1rem .3rem", outline:"none", fontFamily:"var(--sans)" }} />
                     ) : (
-                      <span
-                        title="Dubbelklik om naam te wijzigen"
+                      <span title="Dubbelklik om naam te wijzigen"
                         onDoubleClick={e => { e.stopPropagation(); setRenamingProfile({ id: pr.id, value: pr.name }); }}
-                        style={{ flex:1, fontSize:".7rem", overflow:"hidden", textOverflow:"ellipsis",
-                          whiteSpace:"nowrap", color:"var(--t2)", cursor:"text" }}>
+                        style={{ flex:1, fontSize:".7rem", overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap", color:"var(--t2)", cursor:"text" }}>
                         {pr.name}
                       </span>
                     )}
@@ -6918,13 +6747,12 @@ function App() {
         {activeConn && <div className="sbi">{activeConn.name}</div>}
         <div className="sbi ml">AFAS DataEditor v1.0</div>
         <div className="sbi" onClick={()=>setShowExport(true)}
-          style={{ cursor:"pointer", color:"var(--chrome-dim)", fontSize:".6rem",
-            padding:".15rem .4rem", borderRadius:3, border:"1px solid transparent",
-            transition:"all .12s", fontFamily:"var(--mono)", letterSpacing:".04em" }}
+          title="Backup exporteren / importeren"
+          style={{ cursor:"pointer", color:"var(--chrome-dim)", fontSize:".6rem", padding:".15rem .4rem",
+            borderRadius:3, border:"1px solid transparent", transition:"all .12s", fontFamily:"var(--mono)" }}
           onMouseEnter={e=>{ e.currentTarget.style.color="var(--neon-amber)"; e.currentTarget.style.borderColor="rgba(200,168,75,.3)"; }}
-          onMouseLeave={e=>{ e.currentTarget.style.color="var(--chrome-dim)"; e.currentTarget.style.borderColor="transparent"; }}
-          title="Backup exporteren / importeren">
-          📦 Backup
+          onMouseLeave={e=>{ e.currentTarget.style.color="var(--chrome-dim)"; e.currentTarget.style.borderColor="transparent"; }}>
+          Backup
         </div>
       </div>
 
@@ -7092,8 +6920,6 @@ function App() {
           onClose={()=>setShowEditProfile(false)}
         />
       )}
-      {showAdd  && config && <AddConnectorModal config={config} initialType={showAdd==="update"?"update":"get"} connectors={connectors} afasUpdateConns={config?.afasUpdateConnectors||[]} onClose={()=>setShowAdd(false)} onAdd={addConn} />}
-      {showEdit && config && <AddConnectorModal config={config} editConnector={showEdit} connectors={connectors} afasUpdateConns={config?.afasUpdateConnectors||[]} onClose={()=>setShowEdit(null)} onAdd={addConn} onUpdate={(id,data)=>{ editConnSave(id,data); setShowEdit(null); }} />}
       {showExport && (
         <ExportImportModal
           profiles={profiles}
@@ -7101,6 +6927,8 @@ function App() {
           onClose={()=>setShowExport(false)}
         />
       )}
+      {showAdd  && config && <AddConnectorModal config={config} initialType={showAdd==="update"?"update":"get"} connectors={connectors} afasUpdateConns={config?.afasUpdateConnectors||[]} onClose={()=>setShowAdd(false)} onAdd={addConn} />}
+      {showEdit && config && <AddConnectorModal config={config} editConnector={showEdit} connectors={connectors} afasUpdateConns={config?.afasUpdateConnectors||[]} onClose={()=>setShowEdit(null)} onAdd={addConn} onUpdate={(id,data)=>{ editConnSave(id,data); setShowEdit(null); }} />}
     </div>
   );
 }
