@@ -374,8 +374,11 @@ thead th{
 thead th:hover{color:var(--neon-amber)}
 thead th.th-chk{width:32px;text-align:center;cursor:default}
 thead th.sorted{color:var(--neon-amber);text-shadow:0 0 8px rgba(255,149,0,.4)}
-tbody tr{border-bottom:1px solid rgba(255,149,0,.05);transition:background .07s;cursor:pointer}
-tbody tr:hover td{background:rgba(255,149,0,.04)}
+tbody tr{border-bottom:1px solid rgba(255,149,0,.05);transition:background .07s,box-shadow .07s;cursor:pointer;position:relative}
+tbody tr:hover td{background:rgba(255,149,0,.09);}
+tbody tr:hover{box-shadow:inset 3px 0 0 var(--neon-amber),inset -3px 0 0 var(--neon-amber),0 0 18px rgba(255,149,0,.12);}
+@keyframes bumper-hit{0%{box-shadow:inset 3px 0 0 var(--neon-amber),inset -3px 0 0 var(--neon-amber),0 0 32px rgba(255,149,0,.6),0 0 8px rgba(255,149,0,.9)}60%{box-shadow:inset 3px 0 0 var(--neon-amber),inset -3px 0 0 var(--neon-amber),0 0 18px rgba(255,149,0,.18)}100%{box-shadow:inset 3px 0 0 var(--neon-amber),inset -3px 0 0 var(--neon-amber),0 0 18px rgba(255,149,0,.12)}}
+tbody tr:hover{animation:bumper-hit .22s ease-out forwards}
 tbody tr.r-sel td{background:rgba(0,229,255,.06);border-color:rgba(0,229,255,.12)}
 tbody tr.r-sel td:first-child{border-left:3px solid var(--neon-cyan);padding-left:calc(.85rem - 3px)}
 tbody tr.r-mod td{background:rgba(255,149,0,.05)}
@@ -445,6 +448,9 @@ tbody tr:hover .row-acts{opacity:1}
 }
 .modal.wide{width:660px}
 @keyframes modin{from{transform:translateY(10px) scale(.975);opacity:0}to{transform:none;opacity:1}}
+@keyframes multiball-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(.94)}}
+@keyframes multiball-orb{0%{box-shadow:0 0 8px 3px rgba(0,229,255,.8),0 0 16px rgba(0,229,255,.4)}50%{box-shadow:0 0 14px 5px rgba(0,229,255,1),0 0 28px rgba(0,229,255,.6)}100%{box-shadow:0 0 8px 3px rgba(0,229,255,.8),0 0 16px rgba(0,229,255,.4)}}
+
 @keyframes ball-glow{0%,100%{box-shadow:0 0 6px 2px rgba(57,255,20,.6),0 0 2px rgba(57,255,20,.9)}50%{box-shadow:0 0 14px 4px rgba(57,255,20,.9),0 0 4px rgba(57,255,20,1)}}
 @keyframes trail-pulse{0%,100%{opacity:.7}50%{opacity:1}}
 .mh{
@@ -6981,6 +6987,38 @@ function App() {
                   {werksetRunning===activeWerksetId ? "● RUN" : "○ READY"}
                 </div>
               </div>
+            </div>
+          );
+        })()}
+
+        {/* MULTIBALL indicator — verschijnt als >1 connector actief of scheduler loopt */}
+        {connected && (() => {
+          const scheduledActive = profiles.flatMap(p => (p.werksets||[])).filter(w => w.schedule?.enabled && !pausedSchedules.has(w.id));
+          const totalBalls = (werksetRunning ? 1 : 0) + scheduledActive.length;
+          if (totalBalls < 2) return null;
+          return (
+            <div style={{ display:"flex", alignItems:"center", gap:".45rem", flexShrink:0,
+              padding:".3rem .7rem", borderRadius:4,
+              background:"rgba(0,229,255,.07)", border:"1px solid rgba(0,229,255,.35)",
+              animation:"multiball-pulse .9s ease-in-out infinite",
+              position:"relative", zIndex:1 }}>
+              {/* Ballen */}
+              <div style={{ display:"flex", gap:".25rem", alignItems:"center" }}>
+                {Array.from({length: Math.min(totalBalls, 5)}).map((_,i) => (
+                  <div key={i} style={{
+                    width:9, height:9, borderRadius:"50%",
+                    background:"radial-gradient(circle at 35% 35%,#afffff,var(--neon-cyan) 55%,#004466)",
+                    animation:`multiball-orb ${.7 + i*.15}s ease-in-out infinite`,
+                    animationDelay:`${i * .18}s`
+                  }} />
+                ))}
+                {totalBalls > 5 && <span style={{fontSize:".55rem",color:"var(--neon-cyan)",fontFamily:"var(--mono)"}}>+{totalBalls-5}</span>}
+              </div>
+              <span style={{ fontFamily:"var(--mono)", fontSize:".55rem", fontWeight:700,
+                letterSpacing:".12em", color:"var(--neon-cyan)",
+                textShadow:"0 0 8px rgba(0,229,255,.8)", textTransform:"uppercase" }}>
+                Multiball
+              </span>
             </div>
           );
         })()}
