@@ -55,7 +55,7 @@
 html,body,#root{height:100%;overflow:hidden}
 body{
   background:#06080f;color:var(--text-bright);
-  font-family:var(--sans);font-size:18.75px;letter-spacing:.02em;
+  font-family:var(--sans);font-size:1rem;letter-spacing:.02em;
   -webkit-font-smoothing:antialiased;
 }
 /* Playfield dot texture */
@@ -77,10 +77,10 @@ body::after{
 
 /* ── TOPBAR / SCOREBOARD ───────────────────────────────────────────────────── */
 .topbar{
-  height:64px;
+  height:84px;
   background:linear-gradient(180deg,#000 0%,#0a0e1a 100%);
   border-bottom:3px solid var(--chrome);
-  display:flex;align-items:center;padding:0 1.75rem;gap:1.75rem;flex-shrink:0;
+  display:flex;align-items:stretch;padding:.65rem 2rem;gap:2rem;flex-shrink:0;
   box-shadow:0 4px 32px rgba(255,149,0,.18),0 0 0 1px rgba(255,149,0,.08);
   position:relative;overflow:hidden;
 }
@@ -98,24 +98,24 @@ body::after{
   text-shadow:0 0 8px var(--neon-red),0 0 24px rgba(255,42,74,.5);}
 .brand-mark-r{font-family:'Bungee Inline',sans-serif;font-size:2.375rem;color:var(--neon-cyan);line-height:1;
   text-shadow:0 0 8px var(--neon-cyan),0 0 24px rgba(0,229,255,.5);}
-.brand-text{font-family:var(--mono);font-size:0.65rem;color:var(--chrome-dim);letter-spacing:.15em;text-transform:uppercase;position:relative;z-index:1}
+.brand-text{font-family:var(--mono);font-size:0.65rem;color:var(--chrome-dim);letter-spacing:.15em;text-transform:uppercase;position:relative;z-index:1;line-height:1;align-self:center}
 .brand-sub{display:none}
 @keyframes neon-flicker{
   0%,100%{opacity:1}92%{opacity:1}93%{opacity:.7}94%{opacity:1}96%{opacity:.8}97%{opacity:1}
 }
 
 /* Score panels (DMD displays) */
-.score-cluster{display:flex;gap:.75rem;flex:1;position:relative;z-index:1;max-width:640px}
+.score-cluster{display:flex;gap:.75rem;flex-shrink:0;position:relative;z-index:1;align-items:center}
 .score-panel{
-  flex:1;background:#000;border:2px solid var(--chrome-dim);border-radius:3px;
-  padding:.38rem .85rem;position:relative;overflow:hidden;min-width:110px;
+  flex:0 0 190px;background:#000;border:1px solid var(--chrome-dim);border-radius:3px;
+  padding:.55rem .9rem;position:relative;overflow:hidden;width:190px;
 }
 .score-panel::before{
   content:'';position:absolute;inset:0;
   background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,149,0,.025) 2px,rgba(255,149,0,.025) 3px);
 }
-.score-label{font-family:var(--mono);font-size:0.55rem;color:var(--chrome-dim);letter-spacing:.12em;text-transform:uppercase}
-.score-value{font-family:var(--mono);font-size:1.15rem;color:var(--neon-amber);text-shadow:0 0 8px rgba(255,149,0,.6);letter-spacing:.04em;line-height:1.2}
+.score-label{font-family:var(--mono);font-size:0.62rem;color:var(--chrome-dim);letter-spacing:.12em;text-transform:uppercase}
+.score-value{font-family:var(--mono);font-size:1rem;color:var(--neon-amber);text-shadow:0 0 8px rgba(255,149,0,.6);letter-spacing:.04em;line-height:1.2}
 .score-value.green{color:var(--neon-green);text-shadow:0 0 8px rgba(57,255,20,.6)}
 .score-value.cyan{color:var(--neon-cyan);text-shadow:0 0 8px rgba(0,229,255,.6)}
 .score-value.red{color:var(--neon-red);text-shadow:0 0 8px rgba(255,42,74,.6)}
@@ -165,7 +165,7 @@ body::after{
 
 /* ── LEFT RAIL / SIDEBAR ───────────────────────────────────────────────────── */
 .sidebar{
-  width:220px;flex-shrink:0;background:var(--rail);
+  width:270px;flex-shrink:0;background:var(--rail);
   border-right:2px solid var(--chrome-dim);
   display:flex;flex-direction:column;overflow-y:auto;
   position:relative;
@@ -412,7 +412,7 @@ tbody tr:hover .row-acts{opacity:1}
 
 /* ── SIDE PANEL (right rail / target inspector) ────────────────────────────── */
 .side-panel{
-  width:240px;background:var(--rail);border-left:2px solid var(--chrome-dim);
+  width:300px;background:var(--rail);border-left:2px solid var(--chrome-dim);
   display:flex;flex-direction:column;overflow:hidden;flex-shrink:0;transition:width .18s;
   position:relative;
 }
@@ -434,17 +434,19 @@ tbody tr:hover .row-acts{opacity:1}
 .dvals{display:flex;align-items:center;gap:.25rem;flex-wrap:wrap;justify-content:flex-end}
 .dold{color:var(--neon-red);text-decoration:line-through;font-family:var(--mono);font-size:0.775rem}
 .dnew{color:var(--neon-amber);font-family:var(--mono);font-size:0.775rem}
-.pfooter{padding:.6rem .95rem;border-top:1px solid rgba(200,168,75,.15);display:flex;gap:.38rem;flex-shrink:0;position:relative;z-index:1}
+.pfooter{padding:.75rem .95rem;border-top:1px solid rgba(200,168,75,.15);display:flex;gap:.5rem;flex-shrink:0;position:relative;z-index:1;min-height:3.2rem;align-items:center}
 
 /* ── MODAL (cabinet overlay) ───────────────────────────────────────────────── */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:200;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
 .modal{
-  background:var(--rail-light);border:2px solid var(--chrome);border-radius:6px;width:490px;
-  max-height:88vh;overflow:hidden;display:flex;flex-direction:column;
+  background:var(--rail-light);border:2px solid var(--chrome);border-radius:6px;width:540px;
+  max-height:92vh;overflow:hidden;display:flex;flex-direction:column;
   animation:modin .16s ease;box-shadow:0 0 40px rgba(255,149,0,.18),0 0 80px rgba(255,149,0,.08);
 }
-.modal.wide{width:580px}
+.modal.wide{width:660px}
 @keyframes modin{from{transform:translateY(10px) scale(.975);opacity:0}to{transform:none;opacity:1}}
+@keyframes ball-glow{0%,100%{box-shadow:0 0 6px 2px rgba(57,255,20,.6),0 0 2px rgba(57,255,20,.9)}50%{box-shadow:0 0 14px 4px rgba(57,255,20,.9),0 0 4px rgba(57,255,20,1)}}
+@keyframes trail-pulse{0%,100%{opacity:.7}50%{opacity:1}}
 .mh{
   padding:.75rem 1.1rem .65rem;
   background:linear-gradient(180deg,#000 0%,#0a0e1a 100%);
@@ -457,8 +459,8 @@ tbody tr:hover .row-acts{opacity:1}
   border:1px solid var(--chrome-dim);border-radius:3px;padding:.1rem .35rem;transition:all .12s;
 }
 .mclose:hover{color:var(--neon-red);border-color:var(--neon-red)}
-.mb{padding:.9rem 1.1rem;display:flex;flex-direction:column;gap:.85rem;overflow-y:auto;flex:1}
-.mf{padding:.72rem 1.1rem;border-top:1px solid rgba(200,168,75,.2);display:flex;justify-content:flex-end;gap:.45rem;flex-shrink:0}
+.mb{padding:.9rem 1.1rem;display:flex;flex-direction:column;gap:.85rem;overflow-y:auto;flex:1;min-height:0}
+.mf{padding:.85rem 1.1rem;border-top:1px solid rgba(200,168,75,.2);display:flex;justify-content:flex-end;gap:.6rem;flex-shrink:0;min-height:3.5rem;align-items:center}
 
 /* ── DIFF ──────────────────────────────────────────────────────────────────── */
 .diff-scroll{max-height:280px;overflow-y:auto;border:1px solid rgba(200,168,75,.2);border-radius:3px}
@@ -468,7 +470,7 @@ tbody tr:hover .row-acts{opacity:1}
 
 /* ── STATUS BAR (drain) ────────────────────────────────────────────────────── */
 .statusbar{
-  height:24px;background:#000;border-top:2px solid var(--chrome-dim);
+  height:30px;background:#000;border-top:2px solid var(--chrome-dim);
   display:flex;align-items:center;padding:0 1.2rem;gap:1rem;
   flex-shrink:0;font-family:var(--mono);font-size:0.675rem;letter-spacing:.05em;
 }
@@ -524,6 +526,122 @@ const LS = {
   get: (k, d) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
   set: (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
 };
+
+// ── FILE SYSTEM STORAGE (OneDrive / lokale map) ───────────────────────────────
+const FSS = {
+  _handle: null,   // FileSystemDirectoryHandle
+  _filename: "flpr-data.json",
+
+  // Sla handle op via IndexedDB (overleeft refresh)
+  async _saveHandle(handle) {
+    return new Promise((res, rej) => {
+      const req = indexedDB.open("flpr_fs", 1);
+      req.onupgradeneeded = e => e.target.result.createObjectStore("handles");
+      req.onsuccess = e => {
+        const db = e.target.result;
+        const tx = db.transaction("handles", "readwrite");
+        tx.objectStore("handles").put(handle, "dir");
+        tx.oncomplete = () => { db.close(); res(); };
+        tx.onerror = () => { db.close(); rej(); };
+      };
+      req.onerror = rej;
+    });
+  },
+
+  async _loadHandle() {
+    return new Promise((res) => {
+      const req = indexedDB.open("flpr_fs", 1);
+      req.onupgradeneeded = e => e.target.result.createObjectStore("handles");
+      req.onsuccess = e => {
+        const db = e.target.result;
+        const tx = db.transaction("handles", "readonly");
+        const get = tx.objectStore("handles").get("dir");
+        get.onsuccess = () => { db.close(); res(get.result || null); };
+        get.onerror   = () => { db.close(); res(null); };
+      };
+      req.onerror = () => res(null);
+    });
+  },
+
+  async _clearHandle() {
+    this._handle = null;
+    return new Promise((res) => {
+      const req = indexedDB.open("flpr_fs", 1);
+      req.onupgradeneeded = e => e.target.result.createObjectStore("handles");
+      req.onsuccess = e => {
+        const db = e.target.result;
+        const tx = db.transaction("handles", "readwrite");
+        tx.objectStore("handles").delete("dir");
+        tx.oncomplete = () => { db.close(); res(); };
+        tx.onerror    = () => { db.close(); res(); };
+      };
+      req.onerror = () => res();
+    });
+  },
+
+  isSupported() {
+    return typeof window.showDirectoryPicker === "function";
+  },
+
+  async init() {
+    if (!this.isSupported()) return false;
+    try {
+      const h = await this._loadHandle();
+      if (!h) return false;
+      // Vraag permissie (nodig na refresh)
+      const perm = await h.queryPermission({ mode: "readwrite" });
+      if (perm === "granted") { this._handle = h; return true; }
+      const req = await h.requestPermission({ mode: "readwrite" });
+      if (req === "granted") { this._handle = h; return true; }
+      return false;
+    } catch { return false; }
+  },
+
+  async pickFolder() {
+    if (!this.isSupported()) throw new Error("Niet ondersteund in deze browser");
+    try {
+      const h = await window.showDirectoryPicker({ mode: "readwrite" });
+      this._handle = h;
+      await this._saveHandle(h);
+      return h.name;
+    } catch (e) {
+      if (e.name === "AbortError") return null; // gebruiker annuleerde
+      throw e;
+    }
+  },
+
+  async read() {
+    if (!this._handle) return null;
+    try {
+      const fh = await this._handle.getFileHandle(this._filename, { create: false });
+      const file = await fh.getFile();
+      const text = await file.text();
+      return JSON.parse(text);
+    } catch (e) {
+      if (e.name === "NotFoundError") return null; // bestand bestaat nog niet
+      throw e;
+    }
+  },
+
+  async write(data) {
+    if (!this._handle) return false;
+    try {
+      const fh = await this._handle.getFileHandle(this._filename, { create: true });
+      const writable = await fh.createWritable();
+      await writable.write(JSON.stringify(data, null, 2));
+      await writable.close();
+      return true;
+    } catch { return false; }
+  },
+
+  async disconnect() {
+    await this._clearHandle();
+  },
+
+  folderName() {
+    return this._handle?.name || null;
+  },
+};
 function deepClone(o) { return JSON.parse(JSON.stringify(o)); }
 function uid() { return Math.random().toString(36).slice(2, 8).toUpperCase(); }
 
@@ -558,6 +676,55 @@ class TokenExpiredError extends Error {
   }
 }
 
+// ── AFAS foutmeldingen vertaler ───────────────────────────────────────────────
+function parseAfasError(status, body) {
+  // Probeer JSON te parsen
+  let json = null;
+  try { json = typeof body === "string" ? JSON.parse(body) : body; } catch {}
+
+  const raw = json
+    ? (json.externalMessage || json.message || json.Message || json.detail || "")
+    : (typeof body === "string" ? body : "");
+
+  // Bekende AFAS foutcodes / patronen
+  const known = [
+    // Authenticatie
+    { test: s => [401,403].includes(s),
+      msg: "Token verlopen of ongeldig — vernieuw je App Token in de instellingen." },
+    // Niet gevonden
+    { test: s => s === 404,
+      msg: "Connector of endpoint niet gevonden — controleer de connectornaam." },
+    // Validatiefouten
+    { test: (s,r) => s === 400 && /verplicht|required|mandatory/i.test(r),
+      msg: "Verplicht veld ontbreekt: " + raw },
+    { test: (s,r) => s === 400 && /uniek|unique|duplicate|already exists/i.test(r),
+      msg: "Dubbele waarde — dit record bestaat al: " + raw },
+    { test: (s,r) => s === 400 && /length|te lang|max.*char/i.test(r),
+      msg: "Waarde te lang voor dit veld: " + raw },
+    { test: (s,r) => s === 400 && /type|format|invalid.*date|datum/i.test(r),
+      msg: "Ongeldig formaat (datum of type klopt niet): " + raw },
+    { test: (s,r) => s === 400,
+      msg: raw ? "Validatiefout: " + raw : "Ongeldige aanvraag — controleer de veldwaarden." },
+    // Server/timeout
+    { test: s => s === 429,
+      msg: "Te veel verzoeken — wacht even en probeer opnieuw." },
+    { test: s => s === 500,
+      msg: raw ? "AFAS serverfout: " + raw : "AFAS serverfout — probeer het later opnieuw." },
+    { test: s => s === 503,
+      msg: "AFAS is tijdelijk niet beschikbaar — probeer het later opnieuw." },
+    { test: s => s === 504,
+      msg: "Verbinding verlopen (timeout) — AFAS reageert te langzaam." },
+  ];
+
+  for (const { test, msg } of known) {
+    if (test(status, raw)) return msg;
+  }
+
+  // Fallback: raw bericht of generieke melding
+  if (raw) return raw;
+  return `Onbekende fout (HTTP ${status}) — probeer het opnieuw.`;
+}
+
 async function afasFetch(env, token, path, params = {}, envType = "production") {
   const base = buildBaseUrl(env, envType) + path;
   const url = Object.keys(params).length
@@ -568,9 +735,8 @@ async function afasFetch(env, token, path, params = {}, envType = "production") 
   });
   if (!res.ok) {
     if (res.status === 401 || res.status === 403) throw new TokenExpiredError(res.status);
-    let msg = `HTTP ${res.status}`;
-    try { const body = await res.text(); try { const j = JSON.parse(body); msg += ": " + (j.externalMessage||j.message||j.Message||body.slice(0,300)); } catch { if(body) msg += ": " + body.slice(0,300); } } catch {}
-    throw new Error(msg);
+    let errBody = ""; try { errBody = await res.text(); } catch {}
+    throw new Error(parseAfasError(res.status, errBody));
   }
   return res.json();
 }
@@ -599,14 +765,9 @@ async function afasUpdate(env, token, updateConnector, method, payload, envType 
   }
   if (!res.ok) {
     if (res.status === 401 || res.status === 403) throw new TokenExpiredError(res.status);
-    let msg = `HTTP ${res.status}`;
-    try {
-      const body = await res.text();
-      try { const j = JSON.parse(body); msg += ": " + (j.externalMessage||j.message||j.Message||body.slice(0,400)); }
-      catch { if (body) msg += ": " + body.slice(0, 400); }
-    } catch {}
-    msg += `\n\nURL: ${method} ${url}\nPayload: ${bodyStr.slice(0, 800)}`;
-    throw new Error(msg);
+    let errBody2 = ""; try { errBody2 = await res.text(); } catch {}
+    const errMsg = parseAfasError(res.status, errBody2);
+    throw new Error(errMsg + `\n\nURL: ${method} ${url}`);
   }
   // 204 No Content is success for AFAS updates
   if (res.status === 204) return null;
@@ -1297,7 +1458,7 @@ function TransformModal({ fields, count, rows, onApply, onClose }) {
 
   return (
     <div className="overlay" onClick={e => e.target===e.currentTarget && onClose()}>
-      <div className="modal" style={{ width:600, maxWidth:"96vw" }}>
+      <div className="modal" style={{ width:720, maxWidth:"96vw" }}>
         <div className="mh">
           <div className="mtitle">Transformatie toepassen</div>
           <div className="mclose" onClick={onClose}>✕</div>
@@ -2322,7 +2483,7 @@ function FieldMappingModal({ connector, getFields, config, sampleRow, onSave, on
 
           {/* ── LEFT RAIL: GET fields ── */}
           <div style={{
-            width:220, flexShrink:0,
+            width:270, flexShrink:0,
             background:"var(--rail)", borderRight:"2px solid var(--chrome-dim)",
             display:"flex", flexDirection:"column", overflow:"hidden", position:"relative",
           }}>
@@ -3748,7 +3909,7 @@ function RunConfirmModal({ werkset, config, onConfirm, onDryRun, onClose }) {
   React.useEffect(() => {
     previewWerkset(werkset, config)
       .then(p => { setPreview(p); setPhase("preview"); })
-      .catch(e => { setError(e.message); setPhase("error"); });
+      .catch(e => { setError(e.message || "Ophalen mislukt — controleer de connector."); setPhase("error"); });
   }, []);
 
   const totalRows = (preview?.connectors || []).reduce((s,c) => s + c.totalRows, 0);
@@ -3759,7 +3920,7 @@ function RunConfirmModal({ werkset, config, onConfirm, onDryRun, onClose }) {
     <div style={{ position:"fixed", inset:0, zIndex:900, background:"rgba(0,0,0,.75)",
       display:"flex", alignItems:"center", justifyContent:"center" }}
       onClick={e => e.target===e.currentTarget && onClose()}>
-      <div style={{ width:560, maxHeight:"88vh", display:"flex", flexDirection:"column",
+      <div style={{ width:680, maxHeight:"92vh", display:"flex", flexDirection:"column",
         background:"var(--rail-light)", border:"2px solid var(--chrome)", borderRadius:6,
         boxShadow:"0 0 40px rgba(255,149,0,.2), 0 24px 64px rgba(0,0,0,.9)" }}>
 
@@ -3769,7 +3930,7 @@ function RunConfirmModal({ werkset, config, onConfirm, onDryRun, onClose }) {
           display:"flex", alignItems:"center", justifyContent:"space-between" }}>
           <div style={{ fontFamily:"'Bungee Inline',sans-serif", fontSize:"1rem",
             color:"var(--neon-amber)", textShadow:"0 0 10px rgba(255,149,0,.4)", letterSpacing:".04em" }}>
-            ▶ WERKSET UITVOEREN
+            ▶ MACHINE UITVOEREN
           </div>
           <span onClick={onClose} style={{ cursor:"pointer", color:"var(--chrome-dim)",
             fontFamily:"var(--mono)", border:"1px solid var(--chrome-dim)", borderRadius:2,
@@ -4026,7 +4187,7 @@ function RunsTab({ runHistory, onEnableConnector }) {
         flexDirection:"column", gap:".75rem", color:"var(--chrome-dim)" }}>
         <div style={{ fontSize:"2rem", opacity:.3 }}>▶</div>
         <div style={{ fontFamily:"var(--mono)", fontSize:".72rem", letterSpacing:".08em" }}>
-          GEEN RUNS — START EEN WERKSET OM HIER RESULTATEN TE ZIEN
+          GEEN RUNS — START EEN MACHINE OM HIER RESULTATEN TE ZIEN
         </div>
       </div>
     );
@@ -4160,12 +4321,30 @@ function RunsTab({ runHistory, onEnableConnector }) {
                         <span style={{ fontFamily:"var(--sans)", fontSize:".8rem",
                           color:"var(--text-bright)", flex:1 }}>{c.name}</span>
 
-                        {/* Progress bar */}
-                        <div style={{ width:55, height:4, background:"rgba(255,255,255,.06)",
-                          borderRadius:2, overflow:"hidden", flexShrink:0 }}>
-                          <div style={{ height:"100%", width:`${pct}%`, borderRadius:2,
-                            background: cOk ? "var(--neon-green)" : "var(--neon-amber)",
-                            boxShadow: cOk ? "0 0 4px rgba(57,255,20,.5)" : "0 0 4px rgba(255,149,0,.5)" }} />
+                        {/* Progress bal + spoor (mini) */}
+                        <div style={{ width:55, height:8, position:"relative",
+                          background:"rgba(0,0,0,.4)", borderRadius:4,
+                          border:"1px solid rgba(200,168,75,.15)", flexShrink:0 }}>
+                          {/* spoor */}
+                          <div style={{ position:"absolute", left:1, top:"50%", transform:"translateY(-50%)",
+                            height:2, borderRadius:1,
+                            width:`calc(${Math.max(0,pct-10)}% )`,
+                            background: cOk
+                              ? "linear-gradient(90deg,transparent,rgba(57,255,20,.4))"
+                              : "linear-gradient(90deg,transparent,rgba(255,149,0,.4))",
+                            transition:"width .2s ease" }} />
+                          {/* bal */}
+                          <div style={{ position:"absolute", top:"50%",
+                            left:`calc(${pct}% - 5px)`,
+                            transform:"translateY(-50%)",
+                            width:6, height:6, borderRadius:"50%",
+                            background: cOk
+                              ? "radial-gradient(circle at 35% 35%,#afffaf,var(--neon-green))"
+                              : "radial-gradient(circle at 35% 35%,#ffd580,var(--neon-amber))",
+                            boxShadow: cOk
+                              ? "0 0 5px rgba(57,255,20,.8)"
+                              : "0 0 5px rgba(255,149,0,.8)",
+                            transition:"left .2s ease", zIndex:2 }} />
                         </div>
 
                         <span style={{ fontFamily:"var(--mono)", fontSize:".58rem", color:"var(--chrome-dim)" }}>
@@ -4222,49 +4401,74 @@ function RunsTab({ runHistory, onEnableConnector }) {
 
 
 function Toggle({ value, onChange, label }) {
-  // Flipper-style toggle: horizontal inline version
+  // Arcade flipper bumper-style toggle
   return (
-    <div style={{ display:"flex", alignItems:"center", gap:".55rem", cursor:"pointer" }} onClick={()=>onChange(!value)}>
-      {/* Housing */}
+    <div style={{ display:"flex", alignItems:"center", gap:".65rem", cursor:"pointer" }}
+      onClick={()=>onChange(!value)}>
+
+      {/* Bumper housing — rond zoals een flipper bumper */}
       <div style={{
-        width:42, height:22, borderRadius:5, flexShrink:0, position:"relative",
-        background: value ? "#0c1a12" : "#141824",
-        border: value ? "1px solid rgba(34,197,94,.35)" : "1px solid rgba(255,255,255,.1)",
-        boxShadow: value ? "0 0 8px rgba(34,197,94,.12), inset 0 2px 3px rgba(0,0,0,.4)" : "inset 0 2px 3px rgba(0,0,0,.4)",
-        transition:"all .18s",
-        perspective:60,
+        width:52, height:26, borderRadius:13, flexShrink:0, position:"relative",
+        background: value
+          ? "linear-gradient(180deg,#0a1f0a 0%,#061206 100%)"
+          : "linear-gradient(180deg,#0e101a 0%,#080a12 100%)",
+        border: value
+          ? "2px solid var(--neon-green)"
+          : "2px solid rgba(200,168,75,.25)",
+        boxShadow: value
+          ? "0 0 12px rgba(57,255,20,.5), 0 0 24px rgba(57,255,20,.2), inset 0 1px 2px rgba(0,0,0,.6)"
+          : "inset 0 2px 4px rgba(0,0,0,.6), 0 0 6px rgba(200,168,75,.1)",
+        transition:"all .2s cubic-bezier(.34,1.4,.64,1)",
       }}>
-        {/* Lever */}
+        {/* Achtergrondbaan — de speelbaan */}
+        <div style={{
+          position:"absolute", inset:"3px 4px",
+          borderRadius:9,
+          background: value
+            ? "linear-gradient(90deg,rgba(57,255,20,.08) 0%,rgba(57,255,20,.18) 100%)"
+            : "rgba(0,0,0,.4)",
+          transition:"background .2s",
+        }} />
+
+        {/* Bal — schuift over de baan */}
         <div style={{
           position:"absolute",
-          left:5, right:5, top:3, bottom:3,
-          borderRadius:3,
+          top:"50%", transform:"translateY(-50%)",
+          left: value ? "calc(100% - 22px)" : "4px",
+          width:18, height:18, borderRadius:"50%",
           background: value
-            ? "linear-gradient(180deg,#1a3325 0%,#0d2a1a 100%)"
-            : "linear-gradient(180deg,#2d3550 0%,#252d3d 100%)",
-          border: value ? "1px solid rgba(34,197,94,.2)" : "1px solid rgba(255,255,255,.1)",
-          transform: value ? "rotateX(15deg)" : "rotateX(-15deg)",
-          transition:"transform .16s cubic-bezier(.34,1.4,.64,1), background .18s",
-          boxShadow: value ? "0 -2px 4px rgba(0,0,0,.3)" : "0 2px 4px rgba(0,0,0,.4)",
-          display:"flex", alignItems:"center", justifyContent:"center",
-        }}>
-          {/* Knob */}
-          <div style={{
-            width:10, height:4, borderRadius:2,
-            background: value ? "var(--green)" : "#374060",
-            boxShadow: value ? "0 0 4px rgba(34,197,94,.7)" : "none",
-            transition:"background .18s, box-shadow .18s",
-          }} />
-        </div>
-        {/* Indicator dot */}
+            ? "radial-gradient(circle at 35% 35%, #7fff7f, var(--neon-green) 55%, #006600)"
+            : "radial-gradient(circle at 35% 35%, #8090b0, #4a5570 55%, #1a2030)",
+          border: value
+            ? "1px solid rgba(57,255,20,.8)"
+            : "1px solid rgba(200,168,75,.3)",
+          boxShadow: value
+            ? "0 0 8px var(--neon-green), 0 0 16px rgba(57,255,20,.4), inset 0 -2px 3px rgba(0,80,0,.4)"
+            : "0 2px 4px rgba(0,0,0,.6), inset 0 -1px 2px rgba(0,0,0,.3)",
+          transition:"left .2s cubic-bezier(.34,1.56,.64,1), background .2s, box-shadow .2s",
+          zIndex:2,
+        }} />
+
+        {/* Score-light — knippert aan als actief */}
         <div style={{
-          position:"absolute", top:2, right:3, width:4, height:4, borderRadius:"50%",
-          background: value ? "var(--green)" : "rgba(255,255,255,.1)",
-          boxShadow: value ? "0 0 4px rgba(34,197,94,.8)" : "none",
-          transition:"all .18s",
+          position:"absolute", top:3, left: value ? 4 : "calc(100% - 10px)",
+          width:4, height:4, borderRadius:"50%",
+          background: value ? "var(--neon-amber)" : "rgba(200,168,75,.15)",
+          boxShadow: value ? "0 0 5px var(--neon-amber)" : "none",
+          transition:"all .2s",
+          zIndex:1,
         }} />
       </div>
-      {label && <span style={{ fontSize:".75rem", fontWeight:600, color: value ? "var(--t1)" : "var(--t3)", transition:"color .18s" }}>{label}</span>}
+
+      {label && (
+        <span style={{
+          fontSize:".78rem", fontWeight:700, letterSpacing:".04em",
+          fontFamily:"var(--mono)",
+          color: value ? "var(--neon-green)" : "var(--t3)",
+          textShadow: value ? "0 0 8px rgba(57,255,20,.5)" : "none",
+          transition:"all .2s",
+        }}>{label}</span>
+      )}
     </div>
   );
 }
@@ -4351,9 +4555,9 @@ function WerksetModal({ werkset, onSave, onClose }) {
 
   return (
     <div className="overlay" onClick={e => e.target===e.currentTarget && onClose()}>
-      <div className="modal" style={{ width:540, maxHeight:"90vh", display:"flex", flexDirection:"column" }}>
+      <div className="modal" style={{ width:640, maxHeight:"92vh", display:"flex", flexDirection:"column" }}>
         <div className="mh" style={{ flexShrink:0 }}>
-          <div className="mtitle">{isNew ? "Nieuwe werkset" : "Werkset bewerken"}</div>
+          <div className="mtitle">{isNew ? "Nieuwe machine" : "Machine bewerken"}</div>
           <div className="mclose" onClick={onClose}>✕</div>
         </div>
         <div className="mb" style={{ display:"flex", flexDirection:"column", gap:".8rem", overflowY:"auto" }}>
@@ -4549,7 +4753,7 @@ function EditProfileModal({ profile, onSave, onClose }) {
 
   return (
     <div className="overlay" onClick={e => e.target===e.currentTarget && onClose()}>
-      <div className="modal" style={{ width:480 }}>
+      <div className="modal" style={{ width:600 }}>
         <div className="mh">
           <div className="mtitle">Profiel bewerken</div>
           <div className="mclose" onClick={onClose}>✕</div>
@@ -4618,7 +4822,6 @@ function HomeScreen({ profiles, onSelect, onNewProfile, onRenameWerkset, onRenam
   const envBg    = { production:"rgba(34,197,94,.1)", test:"rgba(245,158,11,.1)", acceptance:"rgba(59,130,246,.1)" };
   const envBorder= { production:"rgba(34,197,94,.2)", test:"rgba(245,158,11,.2)", acceptance:"rgba(59,130,246,.2)" };
   const envSub   = { production:"rest", test:"resttest", acceptance:"restaccept" };
-  const [renaming, setRenaming] = React.useState(null);
 
   // onSelect(profileId, werksetId) — caller decides what to do
   return (
@@ -4662,20 +4865,9 @@ function HomeScreen({ profiles, onSelect, onNewProfile, onRenameWerkset, onRenam
                 borderBottom:"1px solid var(--chrome-dim)" }}>
                 <span style={{ width:8, height:8, borderRadius:"50%", flexShrink:0,
                   background: envColor[et], boxShadow:`0 0 8px ${envColor[et]}` }} />
-                {renaming?.kind==="profile" && renaming.id===pr.id ? (
-                  <input autoFocus value={renaming.value}
-                    onChange={e => setRenaming(r => ({ ...r, value: e.target.value }))}
-                    onBlur={() => { const v = renaming.value.trim(); if (v && onRenameProfile) onRenameProfile(pr.id, v); setRenaming(null); }}
-                    onKeyDown={e => { if (e.key==="Enter") e.target.blur(); if (e.key==="Escape") setRenaming(null); e.stopPropagation(); }}
-                    onClick={e => e.stopPropagation()}
-                    style={{ flex:1, background:"rgba(200,168,75,.1)", border:"1px solid var(--chrome)", borderRadius:3, color:"var(--text-bright)", fontFamily:"'Bungee Inline',sans-serif", fontSize:".85rem", padding:".1rem .3rem", outline:"none", minWidth:0, letterSpacing:".03em" }} />
-                ) : (
-                  <span title="Dubbelklik om naam te wijzigen"
-                    onDoubleClick={e => { e.stopPropagation(); setRenaming({ kind:"profile", id:pr.id, value:pr.name }); }}
-                    style={{ fontFamily:"'Bungee Inline',sans-serif", fontSize:".85rem", color:"var(--text-bright)", flex:1, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap", letterSpacing:".03em", cursor:"text" }}>
-                    {pr.name}
-                  </span>
-                )}
+                <span style={{ fontFamily:"'Bungee Inline',sans-serif", fontSize:".85rem", color:"var(--text-bright)", flex:1, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap", letterSpacing:".03em" }}>
+                  {pr.name}
+                </span>
                 <span style={{ fontSize:".5rem", padding:".1rem .35rem", borderRadius:2,
                   background: envBg[et], color: envColor[et], border:`1px solid ${envBorder[et]}`,
                   fontFamily:"var(--mono)", letterSpacing:".08em", textTransform:"uppercase" }}>
@@ -4688,12 +4880,12 @@ function HomeScreen({ profiles, onSelect, onNewProfile, onRenameWerkset, onRenam
                 {pr.config?.env}.{envSub[et]}.afas.online
               </div>
 
-              {/* Werkset rows */}
+              {/* Tafel rows */}
               <div style={{ padding:".35rem .65rem .55rem", display:"flex", flexDirection:"column", gap:".22rem" }}>
                 {ws.length === 0 && (
                   <div style={{ fontSize:".68rem", color:"var(--chrome-dim)", padding:".45rem .3rem",
                     fontFamily:"var(--mono)", letterSpacing:".04em" }}>
-                    — nog geen werksets —
+                    — nog geen machines —
                   </div>
                 )}
                 {ws.map(w => {
@@ -4710,20 +4902,9 @@ function HomeScreen({ profiles, onSelect, onNewProfile, onRenameWerkset, onRenam
                       onMouseLeave={e=>{ e.currentTarget.style.background="rgba(0,0,0,.3)"; e.currentTarget.style.borderColor="rgba(200,168,75,.18)"; e.currentTarget.style.boxShadow="none"; }}>
                       <span style={{ width:5, height:5, borderRadius:"50%", flexShrink:0,
                         background:"var(--chrome-dim)" }} />
-                      {renaming?.kind==="werkset" && renaming.id===w.id ? (
-                        <input autoFocus value={renaming.value}
-                          onChange={e => setRenaming(r => ({ ...r, value: e.target.value }))}
-                          onBlur={() => { const v = renaming.value.trim(); if (v && onRenameWerkset) onRenameWerkset(pr.id, w.id, v); setRenaming(null); }}
-                          onKeyDown={e => { if (e.key==="Enter") e.target.blur(); if (e.key==="Escape") setRenaming(null); e.stopPropagation(); }}
-                          onClick={e => e.stopPropagation()}
-                          style={{ flex:1, background:"rgba(255,149,0,.08)", border:"1px solid var(--neon-amber)", borderRadius:3, color:"var(--text-bright)", fontFamily:"var(--sans)", fontSize:".72rem", fontWeight:600, padding:".1rem .3rem", outline:"none", minWidth:0 }} />
-                      ) : (
-                        <span title="Dubbelklik om naam te wijzigen"
-                          onDoubleClick={e => { e.stopPropagation(); setRenaming({ kind:"werkset", id:w.id, profileId:pr.id, value:w.name }); }}
-                          style={{ flex:1, fontSize:".72rem", fontWeight:600, color:"var(--text-bright)", overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap", fontFamily:"var(--sans)", letterSpacing:".02em", cursor:"text" }}>
-                          {w.name}
-                        </span>
-                      )}
+                      <span style={{ flex:1, fontSize:".72rem", fontWeight:600, color:"var(--text-bright)", overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap", fontFamily:"var(--sans)", letterSpacing:".02em" }}>
+                        {w.name}
+                      </span>
                       <span style={{ fontSize:".56rem", color:"var(--chrome-dim)", whiteSpace:"nowrap",
                         fontFamily:"var(--mono)" }}>
                         {getCount > 0 ? `${getCount}G` : "0G"}
@@ -4815,7 +4996,7 @@ function SetupScreen({ onConnect, onCancel }) {
       setSel(new Set()); // reset selection on new connection
       setStep(2);
     } catch(e) {
-      setErr(`Verbinding mislukt: ${e.message}`);
+      setErr(e.message || "Verbinding mislukt — controleer omgevingsnummer en token.");
     } finally { setTesting(false); }
   };
 
@@ -4846,7 +5027,7 @@ function SetupScreen({ onConnect, onCancel }) {
 
   return (
     <div className="setup-screen">
-      <div className="setup-card" style={{ width:560 }}>
+      <div className="setup-card" style={{ width:660 }}>
         <div className="setup-head">
           <div className="setup-title">{onCancel ? "Nieuw profiel toevoegen" : "Verbinden met AFAS Profit"}</div>
           <div className="setup-sub">Voer je omgevingstype, nummer en App token in. Na het testen worden alle beschikbare connectoren automatisch opgehaald.</div>
@@ -5814,37 +5995,214 @@ function EditorView({ config, connector, onUpdateConnector, runHistory = [], onE
 }
 
 // ── SETTINGS PAGE ─────────────────────────────────────────────────────────────
-function SettingsPage({ config, onDisconnect }) {
+function SettingsPage({ config, onDisconnect, fssFolder, fssSaving, fssError, onFssConnect, onFssDisconnect, fssSupported }) {
+  const [tab, setTab] = React.useState("settings");
+
+  const Section = ({ title, children }) => (
+    <div style={{ background:"var(--s1)", border:"1px solid var(--b1)", borderRadius:8, overflow:"hidden", marginBottom:"1rem" }}>
+      <div style={{ padding:".7rem 1.1rem", borderBottom:"1px solid var(--b1)", fontFamily:"var(--mono)",
+        fontSize:".6rem", color:"var(--neon-amber)", letterSpacing:".12em", textTransform:"uppercase",
+        background:"rgba(255,149,0,.04)" }}>{title}</div>
+      <div style={{ padding:"1rem 1.1rem" }}>{children}</div>
+    </div>
+  );
+
+  const HelpRow = ({ icon, title, desc }) => (
+    <div style={{ display:"flex", gap:".9rem", padding:".6rem 0", borderBottom:"1px solid rgba(200,168,75,.08)" }}>
+      <div style={{ fontSize:"1.2rem", flexShrink:0, width:"1.8rem", textAlign:"center", paddingTop:".1rem" }}>{icon}</div>
+      <div>
+        <div style={{ fontSize:".8rem", fontWeight:700, color:"var(--text-bright)", marginBottom:".2rem", fontFamily:"var(--mono)" }}>{title}</div>
+        <div style={{ fontSize:".72rem", color:"var(--t2)", lineHeight:1.6 }}>{desc}</div>
+      </div>
+    </div>
+  );
+
+  const ShortcutRow = ({ keys, desc }) => (
+    <div style={{ display:"flex", alignItems:"center", gap:"1rem", padding:".4rem 0", borderBottom:"1px solid rgba(200,168,75,.06)" }}>
+      <div style={{ display:"flex", gap:".3rem", flexShrink:0 }}>
+        {keys.map(k => (
+          <span key={k} style={{ fontFamily:"var(--mono)", fontSize:".68rem", padding:".15rem .45rem",
+            background:"var(--s2)", border:"1px solid rgba(200,168,75,.3)", borderRadius:3,
+            color:"var(--neon-amber)", whiteSpace:"nowrap" }}>{k}</span>
+        ))}
+      </div>
+      <div style={{ fontSize:".72rem", color:"var(--t2)" }}>{desc}</div>
+    </div>
+  );
+
   return (
     <div style={{ flex:1, overflowY:"auto", padding:"2rem", background:"var(--bg)" }}>
-      <div style={{ maxWidth:620, display:"flex", flexDirection:"column", gap:"1.5rem" }}>
-        <div>
-          <div style={{ fontFamily:"var(--serif)", fontSize:"1.35rem", fontStyle:"italic", marginBottom:".2rem" }}>Instellingen</div>
-          <div style={{ fontSize:".78rem", color:"var(--t2)" }}>Beheer je verbinding met AFAS Profit.</div>
+      <div style={{ maxWidth:700 }}>
+
+        {/* Tab header */}
+        <div style={{ display:"flex", gap:0, marginBottom:"1.5rem", borderBottom:"2px solid rgba(200,168,75,.2)" }}>
+          {[["settings","⚙ Instellingen"],["help","? Help & Uitleg"]].map(([k,lbl]) => (
+            <div key={k} onClick={()=>setTab(k)}
+              style={{ padding:".6rem 1.3rem", fontFamily:"var(--mono)", fontSize:".72rem", fontWeight:700,
+                letterSpacing:".06em", textTransform:"uppercase", cursor:"pointer",
+                color: tab===k ? "var(--neon-amber)" : "var(--t3)",
+                borderBottom: tab===k ? "2px solid var(--neon-amber)" : "2px solid transparent",
+                marginBottom:"-2px", transition:"color .15s" }}>
+              {lbl}
+            </div>
+          ))}
         </div>
 
-        {/* Connection */}
-        <div style={{ background:"var(--s1)", border:"1px solid var(--b1)", borderRadius:8, overflow:"hidden" }}>
-          <div style={{ padding:".8rem 1.1rem", borderBottom:"1px solid var(--b1)", fontFamily:"var(--mono)", fontSize:".6rem", color:"var(--t3)", letterSpacing:".1em", textTransform:"uppercase" }}>Verbinding</div>
-          <div style={{ padding:"1rem 1.1rem", display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:"1rem" }}>
-            <div className="fgrp"><div className="flbl">Omgevingstype</div>
-              <div style={{ fontFamily:"var(--mono)", fontSize:".78rem", paddingTop:".2rem", color: config.envType==="production"?"var(--green)":config.envType==="test"?"var(--amber)":"var(--accent)" }}>
-                { {production:"Productie",test:"Test",acceptance:"Acceptatie"}[config.envType||"production"] }
+        {/* ── INSTELLINGEN TAB ── */}
+        {tab === "settings" && (
+          <>
+            <Section title="Verbinding">
+              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:"1rem", marginBottom:"1rem" }}>
+                <div className="fgrp"><div className="flbl">Omgevingstype</div>
+                  <div style={{ fontFamily:"var(--mono)", fontSize:".78rem", paddingTop:".2rem",
+                    color: config.envType==="production"?"var(--green)":config.envType==="test"?"var(--amber)":"var(--accent)" }}>
+                    { {production:"Productie",test:"Test",acceptance:"Acceptatie"}[config.envType||"production"] }
+                  </div>
+                </div>
+                <div className="fgrp"><div className="flbl">Omgevingsnummer</div>
+                  <div style={{ fontFamily:"var(--mono)", fontSize:".78rem", color:"var(--accent)", paddingTop:".2rem", lineHeight:1.5 }}>
+                    {config.env}<span style={{color:"var(--t3)"}}>.{ {production:"rest",test:"resttest",acceptance:"restaccept"}[config.envType||"production"] }.afas.online</span>
+                  </div>
+                </div>
+                <div className="fgrp"><div className="flbl">App token</div>
+                  <div style={{ fontFamily:"var(--mono)", fontSize:".82rem", color:"var(--t3)", paddingTop:".2rem" }}>••••••••••••••••</div>
+                </div>
               </div>
+              <button className="btn btn-danger" onClick={onDisconnect}>Verbinding verbreken &amp; opnieuw instellen</button>
+            </Section>
+
+            <Section title="☁ Cloud opslag (OneDrive / lokale map)">
+              {!fssSupported ? (
+                <div className="notice n-yellow" style={{fontSize:".75rem"}}>
+                  ⚠ Je browser ondersteunt de File System Access API niet. Gebruik Chrome of Edge voor deze functie.
+                </div>
+              ) : fssFolder ? (
+                <div style={{display:"flex", flexDirection:"column", gap:".75rem"}}>
+                  <div style={{display:"flex", alignItems:"center", gap:".75rem"}}>
+                    <div style={{width:8, height:8, borderRadius:"50%", background: fssError ? "var(--neon-red)" : fssSaving ? "var(--neon-amber)" : "var(--neon-green)",
+                      boxShadow: fssError ? "0 0 6px var(--neon-red)" : fssSaving ? "0 0 6px var(--neon-amber)" : "0 0 6px var(--neon-green)",
+                      flexShrink:0, animation: fssSaving ? "blink 1s infinite" : "none"}} />
+                    <div>
+                      <div style={{fontSize:".8rem", color:"var(--text-bright)", fontWeight:600}}>📁 {fssFolder}</div>
+                      <div style={{fontSize:".65rem", color:"var(--t3)", fontFamily:"var(--mono)", marginTop:".1rem"}}>
+                        {fssError ? <span style={{color:"var(--neon-red)"}}>✕ {fssError}</span>
+                          : fssSaving ? <span style={{color:"var(--neon-amber)"}}>⟳ Opslaan…</span>
+                          : <span style={{color:"var(--neon-green)"}}>✓ Gesynchroniseerd — flpr-data.json</span>}
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{fontSize:".72rem", color:"var(--t2)", lineHeight:1.6, padding:".5rem .75rem",
+                    background:"rgba(57,255,20,.04)", border:"1px solid rgba(57,255,20,.12)", borderRadius:4}}>
+                    Wijzigingen worden automatisch opgeslagen naar <strong style={{color:"var(--text-bright)"}}>flpr-data.json</strong> in deze map.
+                    Zet de map in OneDrive voor automatische cloud-sync.
+                  </div>
+                  <div style={{display:"flex", gap:".5rem"}}>
+                    <button className="btn btn-ghost" onClick={onFssConnect}>📁 Andere map kiezen</button>
+                    <button className="btn btn-danger" onClick={onFssDisconnect}>Ontkoppelen</button>
+                  </div>
+                </div>
+              ) : (
+                <div style={{display:"flex", flexDirection:"column", gap:".75rem"}}>
+                  <div style={{fontSize:".75rem", color:"var(--t2)", lineHeight:1.7}}>
+                    Kies een map op je computer — bij voorkeur in OneDrive. FLPR slaat al je instellingen op als
+                    <strong style={{color:"var(--text-bright)"}}> flpr-data.json</strong> in die map.
+                    OneDrive synchroniseert dit automatisch naar de cloud en al je apparaten.
+                  </div>
+                  <div style={{display:"flex", flexDirection:"column", gap:".3rem", fontSize:".7rem", color:"var(--t3)", fontFamily:"var(--mono)"}}>
+                    {["✓ Automatische sync naar OneDrive", "✓ Beschikbaar op al je apparaten", "✓ Geen account of server nodig", "✓ Werkt ook met lokale map of andere cloud"].map(s => (
+                      <div key={s} style={{color: s.startsWith("✓") ? "var(--neon-green)" : "var(--t3)"}}>{s}</div>
+                    ))}
+                  </div>
+                  <button className="btn btn-primary" onClick={onFssConnect} style={{alignSelf:"flex-start"}}>
+                    📁 Map kiezen…
+                  </button>
+                </div>
+              )}
+            </Section>
+          </>
+        )}
+
+        {/* ── HELP TAB ── */}
+        {tab === "help" && (
+          <>
+            {/* Wat is FLPR */}
+            <Section title="Wat is FLPR Data Editor?">
+              <div style={{ fontSize:".78rem", color:"var(--t2)", lineHeight:1.8, marginBottom:".8rem" }}>
+                <strong style={{ color:"var(--neon-amber)" }}>FLPR</strong> is een tool waarmee je data in <strong style={{ color:"var(--text-bright)" }}>AFAS Profit</strong> rechtstreeks kunt ophalen, bekijken en aanpassen — zonder in AFAS zelf te hoeven werken.
+                Je verbindt GetConnectors (data ophalen) met UpdateConnectors (data opslaan), en laat ze automatisch of handmatig draaien.
+              </div>
+              <div style={{ display:"flex", gap:".5rem", flexWrap:"wrap" }}>
+                {[["var(--neon-amber)","Machines","Groepen van connectoren"],["var(--neon-cyan)","GetConnectors","Data ophalen uit Profit"],["var(--neon-green)","UpdateConnectors","Data terugschrijven"],["var(--neon-red)","Runs","Uitgevoerde bewerkingen"]].map(([col,lbl,sub])=>(
+                  <div key={lbl} style={{ background:"var(--s2)", border:`1px solid ${col}33`, borderRadius:4, padding:".4rem .7rem" }}>
+                    <div style={{ fontSize:".65rem", fontFamily:"var(--mono)", color:col, fontWeight:700 }}>{lbl}</div>
+                    <div style={{ fontSize:".62rem", color:"var(--t3)" }}>{sub}</div>
+                  </div>
+                ))}
+              </div>
+            </Section>
+
+            {/* Stap voor stap */}
+            <Section title="Hoe werkt het?">
+              <HelpRow icon="1️⃣" title="Profiel aanmaken"
+                desc="Voeg een profiel toe met je AFAS omgevingsnummer en App Token. Per profiel kun je meerdere machines aanmaken." />
+              <HelpRow icon="2️⃣" title="Machine inrichten"
+                desc="Een machine bevat een of meer GetConnectors (data ophalen) en optioneel een UpdateConnector (opslaan). Je kunt veldkoppelingen instellen zodat de juiste waarden worden teruggeschreven." />
+              <HelpRow icon="3️⃣" title="Data ophalen"
+                desc="Klik op 'Ophalen uit Profit' om data te laden. Je kunt filteren, sorteren en zoeken. Klik op een rij om een record te bewerken." />
+              <HelpRow icon="4️⃣" title="Wijzigingen opslaan"
+                desc="Gewijzigde velden worden oranje gemarkeerd. Klik 'Opslaan naar Profit' om alle wijzigingen terug te schrijven via de UpdateConnector." />
+              <HelpRow icon="5️⃣" title="Automatiseren"
+                desc="Stel per machine een schema in: vaste tijdstippen of een interval binnen een tijdvenster. Pauzeer of herstart de scheduler via het icoontje in de sidebar." />
+            </Section>
+
+            {/* Connectoren */}
+            <Section title="GetConnector vs UpdateConnector">
+              <HelpRow icon="📥" title="GetConnector"
+                desc="Haalt data op uit AFAS. Je stelt de naam in (exact zoals in AFAS), max. records, en optioneel een filter op een veld. Je kunt meerdere GetConnectors aan één machine koppelen." />
+              <HelpRow icon="📤" title="UpdateConnector"
+                desc="Schrijft data terug naar AFAS. Koppel hem aan een GetConnector via 'Veldkoppeling' zodat FLPR weet welk veld in de UpdateConnector overeenkomt met welk GET-veld." />
+              <HelpRow icon="⇄" title="Veldkoppeling"
+                desc="Geeft aan welke velden van de GetConnector worden teruggeschreven, en via welk veld in de UpdateConnector. Niet-gekoppelde velden worden oranje gemarkeerd als je ze aanpast." />
+            </Section>
+
+            {/* Transformaties */}
+            <Section title="Transformaties &amp; slimme velden">
+              <HelpRow icon="⚡" title="Transformatie"
+                desc="Pas data aan voordat hij wordt opgeslagen: zoek &amp; vervang, trim witruimte, hoofdletters, datumconversie, berekeningen en meer. Stel in via de '⚡ Transformatie' knop." />
+              <HelpRow icon="fx" title="Berekende velden"
+                desc="Maak een nieuw veld aan op basis van andere velden met een formule. Gebruik Excel-achtige syntax: ALS(), SAMENVOEGEN(), LINKS(), RECHTS(), etc." />
+            </Section>
+
+            {/* Backup */}
+            <Section title="Backup &amp; herstel">
+              <HelpRow icon="📦" title="Exporteren"
+                desc="Sla al je profielen, machines en connectors op als JSON-bestand. Kies of je tokens en run-historie meeneemt. Gebruik dit als backup of om naar een andere browser/computer over te zetten." />
+              <HelpRow icon="⬆" title="Importeren"
+                desc="Laad een eerder geëxporteerd backup-bestand. Kies 'Samenvoegen' om profielen toe te voegen, of 'Vervangen' om alles te overschrijven. Bestanden met gemaskeerde tokens kunnen niet worden geïmporteerd." />
+            </Section>
+
+            {/* Tips */}
+            <Section title="Tips &amp; aandachtspunten">
+              <HelpRow icon="🔒" title="App Token"
+                desc="Het token wordt lokaal opgeslagen in je browser (localStorage). Gebruik FLPR alleen op een vertrouwde computer. Exporteer nooit een backup met ongemaskeerde tokens naar onbeveiligde locaties." />
+              <HelpRow icon="⚠" title="Test eerst op acceptatie"
+                desc="Wijzigingen worden direct naar AFAS gestuurd. Gebruik altijd eerst de Acceptatie- of Testomgeving voordat je op Productie werkt. Een Dry Run preview toont wat er zou gebeuren zonder daadwerkelijk op te slaan." />
+              <HelpRow icon="↩" title="Revert"
+                desc="Met de Revert-knop in het zijpaneel zet je alle wijzigingen van één record terug naar de originele waarden." />
+              <HelpRow icon="🔄" title="Refresh"
+                desc="Data wordt niet automatisch ververst. Klik op 'Ophalen uit Profit' om de laatste stand op te halen. Bij een run wordt data daarna automatisch herladen." />
+            </Section>
+
+            {/* Over */}
+            <div style={{ textAlign:"center", padding:"1rem 0", color:"var(--t3)", fontSize:".65rem",
+              fontFamily:"var(--mono)", letterSpacing:".06em" }}>
+              FLPR DATA EDITOR — gebouwd op AFAS REST API<br/>
+              <span style={{ color:"rgba(200,168,75,.3)" }}>────────────────────────────────</span>
             </div>
-            <div className="fgrp"><div className="flbl">Omgevingsnummer</div>
-              <div style={{ fontFamily:"var(--mono)", fontSize:".78rem", color:"var(--accent)", paddingTop:".2rem", lineHeight:1.5 }}>
-                {config.env}<span style={{color:"var(--t3)"}}>  .{ {production:"rest",test:"resttest",acceptance:"restaccept"}[config.envType||"production"] }.afas.online</span>
-              </div></div>
-            <div className="fgrp"><div className="flbl">App token</div><div style={{ fontFamily:"var(--mono)", fontSize:".82rem", color:"var(--t3)", paddingTop:".2rem" }}>••••••••••••••••</div></div>
-          </div>
-          <div style={{ padding:".75rem 1.1rem", borderTop:"1px solid var(--b1)" }}>
-            <button className="btn btn-danger" onClick={onDisconnect}>Verbinding verbreken &amp; opnieuw instellen</button>
-          </div>
-        </div>
+          </>
+        )}
 
       </div>
-
     </div>
   );
 }
@@ -5868,11 +6226,12 @@ class ErrorBoundary extends React.Component {
 }
 
 // ── Export / Import Modal ─────────────────────────────────────────────────
-function ExportImportModal({ profiles, onImport, onClose }) {
-  const [tab,        setTab]        = React.useState("export");
-  const [maskTokens, setMaskTokens] = React.useState(true);
-  const [importText, setImportText] = React.useState("");
-  const [importMode, setImportMode] = React.useState("merge");
+function ExportImportModal({ profiles, runLog, onImport, onClose }) {
+  const [tab,            setTab]            = React.useState("export");
+  const [maskTokens,     setMaskTokens]     = React.useState(true);
+  const [includeHistory, setIncludeHistory] = React.useState(false);
+  const [importText,     setImportText]     = React.useState("");
+  const [importMode,     setImportMode]     = React.useState("merge");
   const [importErr,  setImportErr]  = React.useState(null);
   const [importOk,   setImportOk]   = React.useState(null);
   const fileRef = React.useRef(null);
@@ -5881,11 +6240,13 @@ function ExportImportModal({ profiles, onImport, onClose }) {
     _flpr: "backup", _version: 1,
     _exportedAt: new Date().toISOString(),
     _tokensMasked: maskTokens,
+    _includesHistory: includeHistory,
     profiles: profiles.map(p => ({
       ...p,
       config: maskTokens ? { ...p.config, token: "MASKED" } : p.config,
       werksets: (p.werksets||[]).map(w => ({ id:w.id, name:w.name, schedule:w.schedule, connectors:w.connectors||[] }))
-    }))
+    })),
+    runLog: includeHistory ? runLog : undefined
   });
 
   const handleExport = () => {
@@ -5910,8 +6271,9 @@ function ExportImportModal({ profiles, onImport, onClose }) {
     if (parsed._flpr !== "backup" || !Array.isArray(parsed.profiles)) { setImportErr("Geen geldig FLPR backup-bestand."); return; }
     if (parsed._tokensMasked) { setImportErr("Tokens zijn gemaskeerd in dit bestand. Verbindingen opnieuw instellen na import."); return; }
     if (!parsed.profiles.length) { setImportErr("Geen profielen gevonden."); return; }
-    onImport(parsed.profiles, importMode);
-    setImportOk(parsed.profiles.length + " profiel(en) geimporteerd.");
+    onImport(parsed.profiles, importMode, parsed.runLog || null);
+    const histMsg = parsed._includesHistory ? " + run-historie" : "";
+    setImportOk(parsed.profiles.length + " profiel(en)" + histMsg + " geimporteerd.");
   };
 
   const ex = buildExport();
@@ -5921,7 +6283,7 @@ function ExportImportModal({ profiles, onImport, onClose }) {
 
   return (
     <div className="overlay" onClick={e=>e.target===e.currentTarget&&onClose()}>
-      <div className="modal" style={{width:500}}>
+      <div className="modal" style={{width:600}}>
         <div className="mh">
           <div className="mtitle">Backup &amp; Herstel</div>
           <div className="mclose" onClick={onClose}>X</div>
@@ -5940,7 +6302,7 @@ function ExportImportModal({ profiles, onImport, onClose }) {
         <div className="mb" style={{display:"flex",flexDirection:"column",gap:".8rem"}}>
           {tab==="export" && (<>
             <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:".5rem"}}>
-              {[[pc,"profielen","var(--neon-amber)"],[wc,"werksets","var(--neon-cyan)"],[cc,"connectors","var(--neon-green)"]].map(([n,lbl,col])=>(
+              {[[pc,"profielen","var(--neon-amber)"],[wc,"machines","var(--neon-cyan)"],[cc,"connectors","var(--neon-green)"]].map(([n,lbl,col])=>(
                 <div key={lbl} style={{background:"var(--s2)",border:"1px solid var(--b1)",borderRadius:4,padding:".5rem",textAlign:"center"}}>
                   <div style={{fontFamily:"var(--mono)",fontSize:"1.2rem",fontWeight:700,color:col}}>{n}</div>
                   <div style={{fontSize:".6rem",color:"var(--t3)",textTransform:"uppercase",fontFamily:"var(--mono)"}}>{lbl}</div>
@@ -5954,8 +6316,15 @@ function ExportImportModal({ profiles, onImport, onClose }) {
                 <div style={{fontSize:".62rem",color:"var(--t3)"}}>{maskTokens?"Veilig: tokens worden NIET meegenomen":"Tokens worden meegenomen in plaintext"}</div>
               </div>
             </div>
+            <div style={{display:"flex",alignItems:"center",gap:".65rem",background:"var(--s2)",border:"1px solid var(--b1)",borderRadius:4,padding:".6rem .8rem"}}>
+              <Toggle value={includeHistory} onChange={setIncludeHistory} label="" />
+              <div>
+                <div style={{fontSize:".72rem",fontWeight:600,color:"var(--t1)"}}>Run-historie meenemen</div>
+                <div style={{fontSize:".62rem",color:"var(--t3)"}}>{includeHistory?"Logs van alle machines worden meegenomen in de backup":"Alleen profielen en connectors, geen run-logs"}</div>
+              </div>
+            </div>
             {!maskTokens && <div className="notice n-red" style={{fontSize:".68rem"}}>Let op: bewaar dit bestand op een veilige locatie.</div>}
-            <div className="notice n-blue" style={{fontSize:".67rem"}}>Run-historie wordt niet meegenomen in de export.</div>
+            <div className="notice n-blue" style={{fontSize:".67rem"}}>Run-historie wordt {includeHistory ? "meegenomen" : "niet meegenomen"} in de export.</div>
             <button className="btn btn-primary" style={{alignSelf:"flex-start"}} onClick={handleExport}>Backup downloaden</button>
           </>)}
           {tab==="import" && (<>
@@ -6030,6 +6399,65 @@ function App() {
 
   useEffect(() => { LS.set("afas_profiles", profiles); }, [profiles]);
   useEffect(() => { LS.set("afas_active_profile", activeProfileId); }, [activeProfileId]);
+  useEffect(() => { LS.set("flpr_runlog", lastRunLog); }, [lastRunLog]);
+
+  // ── FILE SYSTEM SYNC ────────────────────────────────────────────────────────
+  const [fssFolder,  setFssFolder]  = useState(null);   // naam van gekoppelde map
+  const [fssSaving,  setFssSaving]  = useState(false);  // bezig met schrijven
+  const [fssError,   setFssError]   = useState(null);   // laatste fout
+
+  // Init: herstel eerder gekozen map na refresh
+  useEffect(() => {
+    FSS.init().then(ok => {
+      if (ok) setFssFolder(FSS.folderName());
+    });
+  }, []);
+
+  // Schrijf naar bestand elke keer dat profiles of runLog wijzigt
+  const fssWriteRef = React.useRef(null);
+  useEffect(() => {
+    if (!fssFolder) return;
+    clearTimeout(fssWriteRef.current);
+    fssWriteRef.current = setTimeout(async () => {
+      setFssSaving(true);
+      try {
+        const ok = await FSS.write({
+          _version: 1,
+          _savedAt: new Date().toISOString(),
+          profiles,
+          activeProfileId,
+          runLog: lastRunLog,
+          zoom,
+        });
+        if (!ok) setFssError("Schrijven mislukt");
+        else setFssError(null);
+      } catch(e) { setFssError(e.message); }
+      finally { setFssSaving(false); }
+    }, 800); // debounce 800ms
+  }, [profiles, activeProfileId, lastRunLog, fssFolder]);
+
+  const fssConnect = async () => {
+    try {
+      const name = await FSS.pickFolder();
+      if (!name) return;
+      setFssFolder(name);
+      // Lees bestaande data uit de map
+      const data = await FSS.read();
+      if (data?.profiles?.length) {
+        setProfiles(data.profiles);
+        if (data.activeProfileId) setActiveProfileId(data.activeProfileId);
+        if (data.runLog) setLastRunLog(data.runLog);
+        if (data.zoom)  setZoom(data.zoom);
+      }
+      setFssError(null);
+    } catch(e) { setFssError(e.message); }
+  };
+
+  const fssDisconnect = async () => {
+    await FSS.disconnect();
+    setFssFolder(null);
+    setFssError(null);
+  };
 
   // Patch helpers
   const patchProfile  = (pid, fn) => setProfiles(prev => prev.map(p => p.id===pid ? {...p, ...fn(p)} : p));
@@ -6038,40 +6466,194 @@ function App() {
   const [werksetRunning, setWerksetRunning] = useState(null); // werkset id currently running
   const [showRunConfirm, setShowRunConfirm] = useState(null); // werkset | null
   const [pendingPreview, setPendingPreview] = useState(null); // previewData | null
-  const [lastRunLog,     setLastRunLog]     = useState({});   // { [werksetId]: [log, ...] }
+  const [lastRunLog,     setLastRunLog]     = useState(() => LS.get("flpr_runlog", {}));   // { [werksetId]: [log, ...] }
   const [runProgress,    setRunProgress]    = useState(null); // { connName, done, total, connector } | null
+  const [pausedSchedules, setPausedSchedules] = useState(new Set());
+  const [zoom, setZoom] = useState(() => {
+    const saved = LS.get("flpr_zoom", 125);
+    return [75, 100, 125, 150, 175].includes(saved) ? saved : 125;
+  });
+  // Pas html font-size aan zodra zoom verandert
+  useEffect(() => {
+    document.documentElement.style.fontSize = zoom + "%";
+    LS.set("flpr_zoom", zoom);
+  }, [zoom]);
+  const ZOOM_STEPS = [75, 100, 125, 150, 175];
+  const zoomIn  = () => setZoom(z => { const i = ZOOM_STEPS.indexOf(z); return i < ZOOM_STEPS.length-1 ? ZOOM_STEPS[i+1] : z; });
+  const zoomOut = () => setZoom(z => { const i = ZOOM_STEPS.indexOf(z); return i > 0 ? ZOOM_STEPS[i-1] : z; }); // werkset ids waarvan scheduler gepauzeerd is
   const runAbortRef = React.useRef(null); // AbortController for active run
   const [tokenExpiredAlert, setTokenExpiredAlert] = useState(false); // toon token-verlopen banner
   const MAX_RUNS_PER_WERKSET = 20; // bewaar max N runs per werkset (voorkomt localStorage overflow)
   const [showWerksetPopup, setShowWerksetPopup] = useState(false);
 
-  // ── Interval scheduler: polls active interval werksets while tab is open ──
+  // ── Scheduler: ondersteunt interval én vaste tijdstippen, beide pauzeerbaar ──
   useEffect(() => {
     if (!activeWerkset || !activeProfile) return;
     const sched = activeWerkset.schedule;
-    if (!sched?.enabled || sched.mode !== "interval") return;
+    if (!sched?.enabled) return;
+    if (pausedSchedules.has(activeWerkset.id)) return; // gepauzeerd door gebruiker
 
     const check = () => {
-      const now   = new Date();
-      const dow   = now.getDay();
-      const dom   = now.getDate();
+      if (werksetRunning) return;
+      const now = new Date();
+      const dow = now.getDay();
+      const dom = now.getDate();
       const dayOk = sched.freq === "daily" ? true
         : sched.freq === "weekly"  ? (sched.days||[]).includes(dow)
         : sched.freq === "monthly" ? (sched.days||[]).includes(dom)
         : false;
       if (!dayOk) return;
-      const [fh,fm] = (sched.windowFrom||"00:00").split(":").map(Number);
-      const [th,tm] = (sched.windowTo  ||"23:59").split(":").map(Number);
-      const mins = now.getHours()*60 + now.getMinutes();
-      const fromMins = fh*60+fm, toMins = th*60+tm;
-      if (mins < fromMins || mins >= toMins) return;
-      if (!werksetRunning) executeRun(activeWerkset, null);
+
+      if (sched.mode === "interval") {
+        const [fh,fm] = (sched.windowFrom||"00:00").split(":").map(Number);
+        const [th,tm] = (sched.windowTo  ||"23:59").split(":").map(Number);
+        const mins = now.getHours()*60 + now.getMinutes();
+        if (mins < fh*60+fm || mins >= th*60+tm) return;
+        executeRun(activeWerkset, null);
+      } else if (sched.mode === "fixed") {
+        // Vaste tijdstippen: check of huidige minuut overeenkomt met een ingesteld tijdstip
+        const hhmm = now.getHours().toString().padStart(2,"0") + ":" + now.getMinutes().toString().padStart(2,"0");
+        if ((sched.times||[]).includes(hhmm)) executeRun(activeWerkset, null);
+      }
     };
 
-    const tid = setInterval(check, (sched.intervalSec||300) * 1000);
+    // Interval: elke X seconden. Vaste tijden: elke minuut checken.
+    const tickMs = sched.mode === "interval" ? (sched.intervalSec||300) * 1000 : 60_000;
+    const tid = setInterval(check, tickMs);
     return () => clearInterval(tid);
-  }, [activeWerkset?.id, activeWerkset?.schedule?.enabled, activeWerkset?.schedule?.intervalSec,
-      activeWerkset?.schedule?.windowFrom, activeWerkset?.schedule?.windowTo, werksetRunning]);
+  }, [activeWerkset?.id, activeWerkset?.schedule?.enabled, activeWerkset?.schedule?.mode,
+      activeWerkset?.schedule?.intervalSec, activeWerkset?.schedule?.windowFrom,
+      activeWerkset?.schedule?.windowTo, activeWerkset?.schedule?.times,
+      werksetRunning, pausedSchedules]);
+
+  // Flipper plunger launch — realistisch via Web Audio API
+  const playFlipperLaunch = () => {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const t = ctx.currentTime;
+      const sr = ctx.sampleRate;
+
+      // ── helper: maak gefilterd ruisbuffer ──────────────────────────
+      const makeNoise = (dur) => {
+        const b = ctx.createBuffer(1, Math.ceil(sr * dur), sr);
+        const d = b.getChannelData(0);
+        for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+        const s = ctx.createBufferSource(); s.buffer = b; return s;
+      };
+
+      // ── FASE 1: Plunger terugtrekken (0.00–0.18s) ──────────────────
+      // Krakend metaalgeluid: bandpass ruis + lage toon
+      const pullNoise = makeNoise(0.18);
+      const pullBP = ctx.createBiquadFilter();
+      pullBP.type = 'bandpass'; pullBP.frequency.value = 320; pullBP.Q.value = 0.8;
+      const pullGain = ctx.createGain();
+      pullGain.gain.setValueAtTime(0, t);
+      pullGain.gain.linearRampToValueAtTime(0.18, t + 0.04);
+      pullGain.gain.setValueAtTime(0.18, t + 0.15);
+      pullGain.gain.linearRampToValueAtTime(0, t + 0.18);
+      pullNoise.connect(pullBP); pullBP.connect(pullGain); pullGain.connect(ctx.destination);
+      pullNoise.start(t); pullNoise.stop(t + 0.18);
+
+      // Veer-spanning: lage dreun
+      const spring = ctx.createOscillator();
+      const springGain = ctx.createGain();
+      spring.type = 'sine'; spring.frequency.setValueAtTime(55, t);
+      spring.frequency.linearRampToValueAtTime(38, t + 0.16);
+      springGain.gain.setValueAtTime(0.28, t);
+      springGain.gain.linearRampToValueAtTime(0.38, t + 0.14);
+      springGain.gain.linearRampToValueAtTime(0, t + 0.18);
+      spring.connect(springGain); springGain.connect(ctx.destination);
+      spring.start(t); spring.stop(t + 0.18);
+
+      // ── FASE 2: Plunger losschiet (0.18s) — mechanische KLAP ───────
+      // Harde impuls: korte ruis burst
+      const impNoise = makeNoise(0.04);
+      const impHP = ctx.createBiquadFilter();
+      impHP.type = 'highpass'; impHP.frequency.value = 200;
+      const impGain = ctx.createGain();
+      impGain.gain.setValueAtTime(0.9, t + 0.18);
+      impGain.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+      impNoise.connect(impHP); impHP.connect(impGain); impGain.connect(ctx.destination);
+      impNoise.start(t + 0.18); impNoise.stop(t + 0.22);
+
+      // Metalen 'thwack' — snel dalende toon
+      const thwack = ctx.createOscillator();
+      const thwackGain = ctx.createGain();
+      thwack.type = 'triangle';
+      thwack.frequency.setValueAtTime(420, t + 0.18);
+      thwack.frequency.exponentialRampToValueAtTime(95, t + 0.27);
+      thwackGain.gain.setValueAtTime(0.7, t + 0.18);
+      thwackGain.gain.exponentialRampToValueAtTime(0.001, t + 0.30);
+      thwack.connect(thwackGain); thwackGain.connect(ctx.destination);
+      thwack.start(t + 0.18); thwack.stop(t + 0.30);
+
+      // Veer-echo: naklinken van de veer
+      const echo = ctx.createOscillator();
+      const echoGain = ctx.createGain();
+      echo.type = 'sine';
+      echo.frequency.setValueAtTime(38, t + 0.20);
+      echo.frequency.exponentialRampToValueAtTime(72, t + 0.45);
+      echoGain.gain.setValueAtTime(0.22, t + 0.20);
+      echoGain.gain.exponentialRampToValueAtTime(0.001, t + 0.50);
+      // AM tremolo voor veer-vibratie effect
+      const tremoloOsc = ctx.createOscillator();
+      const tremoloGain = ctx.createGain();
+      tremoloOsc.frequency.setValueAtTime(28, t + 0.20);
+      tremoloOsc.frequency.exponentialRampToValueAtTime(8, t + 0.50);
+      tremoloGain.gain.value = 0.5;
+      tremoloOsc.connect(tremoloGain); tremoloGain.connect(echoGain.gain);
+      echo.connect(echoGain); echoGain.connect(ctx.destination);
+      tremoloOsc.start(t + 0.20); tremoloOsc.stop(t + 0.52);
+      echo.start(t + 0.20); echo.stop(t + 0.52);
+
+      // ── FASE 3: Bal schiet omhoog (0.22–0.55s) ─────────────────────
+      // Rollend geluid: ruis + stijgende bandpass freq
+      const rollNoise = makeNoise(0.35);
+      const rollBP = ctx.createBiquadFilter();
+      rollBP.type = 'bandpass'; rollBP.Q.value = 2.5;
+      rollBP.frequency.setValueAtTime(180, t + 0.22);
+      rollBP.frequency.exponentialRampToValueAtTime(1800, t + 0.52);
+      const rollGain = ctx.createGain();
+      rollGain.gain.setValueAtTime(0.22, t + 0.22);
+      rollGain.gain.exponentialRampToValueAtTime(0.001, t + 0.55);
+      rollNoise.connect(rollBP); rollBP.connect(rollGain); rollGain.connect(ctx.destination);
+      rollNoise.start(t + 0.22); rollNoise.stop(t + 0.56);
+
+      // ── FASE 4: Bumper-hit (0.56s) — metalen PING ──────────────────
+      const ping1 = ctx.createOscillator();
+      const ping1G = ctx.createGain();
+      ping1.type = 'sine';
+      ping1.frequency.setValueAtTime(1240, t + 0.56);
+      ping1.frequency.exponentialRampToValueAtTime(880, t + 0.75);
+      ping1G.gain.setValueAtTime(0.55, t + 0.56);
+      ping1G.gain.exponentialRampToValueAtTime(0.001, t + 0.80);
+      ping1.connect(ping1G); ping1G.connect(ctx.destination);
+      ping1.start(t + 0.56); ping1.stop(t + 0.80);
+
+      // Overtoon voor rijker bumper-geluid
+      const ping2 = ctx.createOscillator();
+      const ping2G = ctx.createGain();
+      ping2.type = 'sine';
+      ping2.frequency.setValueAtTime(2180, t + 0.56);
+      ping2.frequency.exponentialRampToValueAtTime(1600, t + 0.72);
+      ping2G.gain.setValueAtTime(0.22, t + 0.56);
+      ping2G.gain.exponentialRampToValueAtTime(0.001, t + 0.72);
+      ping2.connect(ping2G); ping2G.connect(ctx.destination);
+      ping2.start(t + 0.56); ping2.stop(t + 0.73);
+
+      // Bumper ruis-click
+      const bumpNoise = makeNoise(0.04);
+      const bumpBP = ctx.createBiquadFilter();
+      bumpBP.type = 'bandpass'; bumpBP.frequency.value = 2400; bumpBP.Q.value = 1.2;
+      const bumpG = ctx.createGain();
+      bumpG.gain.setValueAtTime(0.4, t + 0.56);
+      bumpG.gain.exponentialRampToValueAtTime(0.001, t + 0.60);
+      bumpNoise.connect(bumpBP); bumpBP.connect(bumpG); bumpG.connect(ctx.destination);
+      bumpNoise.start(t + 0.56); bumpNoise.stop(t + 0.60);
+
+      setTimeout(() => ctx.close(), 1200);
+    } catch(e) { /* audio niet beschikbaar */ }
+  };
 
   const runWerksetNow = (werkset) => {
     if (werksetRunning) return;
@@ -6084,6 +6666,7 @@ function App() {
     const abort = new AbortController();
     runAbortRef.current = abort;
     setWerksetRunning(werkset.id);
+    playFlipperLaunch();
     setRunProgress({ connName: "Ophalen…", done: 0, total: 0, saved: 0, failed: 0 });
     try {
       const log = await runWerkset(werkset, activeProfile.config, previewData,
@@ -6201,15 +6784,19 @@ function App() {
     if (activeProfileId === id) setActiveProfileId(profiles.filter(pr => pr.id !== id)[0]?.id || null);
   };
 
-  const handleImport = (incoming, mode) => {
+  const handleImport = (incoming, mode, incomingRunLog) => {
     if (mode === "replace") {
       setProfiles(incoming);
       setActiveProfileId(incoming[0]?.id || null);
+      if (incomingRunLog) setLastRunLog(incomingRunLog);
     } else {
       setProfiles(prev => {
         const ids = new Set(prev.map(p => p.id));
         return [...prev, ...incoming.filter(p => !ids.has(p.id))];
       });
+      if (incomingRunLog) {
+        setLastRunLog(prev => ({ ...incomingRunLog, ...prev })); // eigen logs hebben prioriteit
+      }
     }
   };
 
@@ -6284,16 +6871,28 @@ function App() {
 
             {/* Progress bar + tellers */}
             <div style={{ flex:1, display:"flex", flexDirection:"column", gap:".3rem" }}>
-              <div style={{ height:6, background:"rgba(255,255,255,.08)", borderRadius:3, overflow:"hidden" }}>
-                <div style={{
-                  height:"100%", borderRadius:3,
-                  background:"linear-gradient(90deg,var(--neon-green),rgba(57,255,20,.7))",
-                  boxShadow:"0 0 10px rgba(57,255,20,.6)",
-                  width: runProgress.total > 0 ? `${Math.round((runProgress.done/runProgress.total)*100)}%` : "100%",
-                  transition:"width .25s ease",
-                  animation: runProgress.total === 0 ? "pulse 1.2s ease-in-out infinite" : "none",
-                }} />
-              </div>
+              {/* Flipper bal + spoor progress bar */}
+              {(()=>{ const pct2 = runProgress.total > 0 ? Math.round((runProgress.done/runProgress.total)*100) : 0;
+                const indet = runProgress.total === 0;
+                return (
+                  <div style={{ height:14, position:"relative", background:"rgba(0,0,0,.4)",
+                    borderRadius:7, border:"1px solid rgba(200,168,75,.2)" }}>
+                    <div style={{ position:"absolute", left:2, top:"50%", transform:"translateY(-50%)",
+                      height:4, borderRadius:2,
+                      width: indet ? "55%" : `calc(${Math.max(0,pct2-5)}% )`,
+                      background:"linear-gradient(90deg,transparent,rgba(57,255,20,.15) 30%,rgba(57,255,20,.5))",
+                      transition:"width .3s ease",
+                      animation: indet ? "trail-pulse 1s ease-in-out infinite" : "none" }} />
+                    <div style={{ position:"absolute", top:"50%",
+                      left: indet ? "55%" : `calc(${pct2}% - 7px)`,
+                      transform:"translateY(-50%)",
+                      width:12, height:12, borderRadius:"50%",
+                      background:"radial-gradient(circle at 35% 35%,#afffaf,var(--neon-green) 55%,#006600)",
+                      boxShadow:"0 0 8px 2px rgba(57,255,20,.7)",
+                      animation:"ball-glow 1s ease-in-out infinite",
+                      transition:"left .3s ease", zIndex:2 }} />
+                  </div>
+                ); })()}
               <div style={{ display:"flex", gap:"1.2rem", fontFamily:"var(--mono)", fontSize:".6rem" }}>
                 {runProgress.total > 0 && (
                   <span style={{ color:"var(--chrome-dim)" }}>
@@ -6343,12 +6942,14 @@ function App() {
         )}
 
         {/* FLPR wordmark */}
-        <div className="brand-mark">
-          <span className="brand-mark-fl">FL</span>
-          <span className="brand-mark-p">P</span>
-          <span className="brand-mark-r">R</span>
+        <div style={{ display:"flex", alignItems:"center", gap:".75rem", flexShrink:0 }}>
+          <div className="brand-mark">
+            <span className="brand-mark-fl">FL</span>
+            <span className="brand-mark-p">P</span>
+            <span className="brand-mark-r">R</span>
+          </div>
+          <span className="brand-text">data editor</span>
         </div>
-        <span className="brand-text">data connector</span>
 
         {/* DMD score panels */}
         {connected && (() => {
@@ -6359,8 +6960,8 @@ function App() {
           return (
             <div className="score-cluster">
               <div className="score-panel">
-                <div className="score-label">Werkset</div>
-                <div className="score-value" style={{ fontSize:".85rem", overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap", maxWidth:"100%" }} title={ws?.name}>{ws?.name || "—"}</div>
+                <div className="score-label">Machine</div>
+                <div className="score-value" style={{ fontSize:"1rem", overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap", maxWidth:"100%" }} title={ws?.name}>{ws?.name || "—"}</div>
               </div>
               <div className="score-panel">
                 <div className="score-label">Get / UC</div>
@@ -6368,14 +6969,14 @@ function App() {
               </div>
               <div className="score-panel">
                 <div className="score-label">Profiel</div>
-                <div className="score-value" style={{ fontSize:".72rem", color:"var(--neon-cyan)" }}>
+                <div className="score-value" style={{ fontSize:"1rem", color:"var(--neon-cyan)", overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }} title={activeProfile?.name}>
                   {activeProfile?.name || "—"}
                 </div>
               </div>
               <div className="score-panel">
                 <div className="score-label">Status</div>
                 <div className="score-value" style={{
-                  fontSize:".85rem",
+                  fontSize:"1rem", overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap",
                   color: werksetRunning===activeWerksetId ? "var(--neon-green)" : "var(--chrome-dim)" }}>
                   {werksetRunning===activeWerksetId ? "● RUN" : "○ READY"}
                 </div>
@@ -6404,6 +7005,7 @@ function App() {
             </div>
           )}
         </div>
+
 
         <div className="ml" />
         <div className={`sync-pill ${connected?"on":"off"}`}>
@@ -6438,15 +7040,46 @@ function App() {
           onExport={()=>setShowExport(true)}
         />
         : page==="settings"
-        ? <SettingsPage config={config} onDisconnect={()=>setPage("home")} />
+        ? <SettingsPage config={config} onDisconnect={()=>setPage("home")} fssFolder={fssFolder} fssSaving={fssSaving} fssError={fssError} onFssConnect={fssConnect} onFssDisconnect={fssDisconnect} fssSupported={FSS.isSupported()} />
         : (
           <div className="layout">
             {/* SIDEBAR */}
             <div className="sidebar">
-              {/* WERKSET SECTIE — rijen zoals GET-connectors, max 10, popup bij meer */}
+              {/* TAFEL SECTIE — rijen zoals GET-connectors, max 10, popup bij meer */}
+              {/* Auto-machines statusbalk */}
+              {werksets.some(w => w.schedule?.enabled) && (() => {
+                const autoMachines = werksets.filter(w => w.schedule?.enabled);
+                const activeCount  = autoMachines.filter(w => !pausedSchedules.has(w.id)).length;
+                const pausedCount  = autoMachines.length - activeCount;
+                return (
+                  <div style={{ margin:".3rem .5rem .1rem", padding:".3rem .55rem", borderRadius:4,
+                    background:"rgba(57,255,20,.06)", border:"1px solid rgba(57,255,20,.18)",
+                    fontSize:".58rem", fontFamily:"var(--mono)", display:"flex", gap:".5rem", alignItems:"center" }}>
+                    <span style={{ color:"var(--neon-green)", letterSpacing:".04em" }}>AUTO</span>
+                    <span style={{ color: activeCount > 0 ? "var(--neon-green)" : "var(--text-dim)" }}>
+                      {activeCount} actief
+                    </span>
+                    {pausedCount > 0 && (
+                      <span style={{ color:"var(--neon-amber)", opacity:.7 }}>{pausedCount} gepauzeerd</span>
+                    )}
+                    <span style={{ marginLeft:"auto", cursor:"pointer", color:"var(--text-dim)",
+                      fontSize:".55rem", letterSpacing:".04em" }}
+                      title={activeCount > 0 ? "Alle automatische machines pauzeren" : "Alle automatische machines hervatten"}
+                      onClick={() => {
+                        if (activeCount > 0) {
+                          setPausedSchedules(prev => new Set([...prev, ...autoMachines.map(w => w.id)]));
+                        } else {
+                          setPausedSchedules(prev => { const n = new Set(prev); autoMachines.forEach(w => n.delete(w.id)); return n; });
+                        }
+                      }}>
+                      {activeCount > 0 ? "⏸ alles" : "▶ alles"}
+                    </span>
+                  </div>
+                );
+              })()}
               <div className="sb-sec">
                 <div className="sb-lbl">
-                  Werksets
+                  Machines
                   {werksets.length > 10 && (
                     <span onClick={()=>setShowWerksetPopup(true)}
                       style={{ marginLeft:"auto", fontSize:".5rem", color:"var(--neon-cyan)", cursor:"pointer",
@@ -6458,14 +7091,16 @@ function App() {
                   )}
                 </div>
 
-                {werksets.length === 0 && <div className="no-act">Geen werksets.</div>}
+                {werksets.length === 0 && <div className="no-act">Geen machines.</div>}
 
                 {werksets.slice(0, 10).map(w => {
-                  const isActive = w.id === activeWerksetId;
-                  const running  = werksetRunning === w.id;
-                  const schedIcon = w.schedule?.enabled
-                    ? (w.schedule.mode==="interval" ? "🔄" : "⏱") : null;
-                  const connCount = (w.connectors||[]).length;
+                  const isActive   = w.id === activeWerksetId;
+                  const running    = werksetRunning === w.id;
+                  const hasAuto    = w.schedule?.enabled;
+                  const isInterval = w.schedule?.mode === "interval";
+                  const isPaused   = pausedSchedules.has(w.id);
+                  const schedIcon  = hasAuto ? (isInterval ? "🔄" : "⏱") : null;
+                  const connCount  = (w.connectors||[]).length;
                   return (
                     <div key={w.id}
                       className={`si sb-row${isActive ? " active" : ""}`}
@@ -6494,9 +7129,24 @@ function App() {
                           {w.name || "Standaard"}
                         </span>
                       )}
-                      {schedIcon && (
-                        <span style={{ fontSize:".6rem", marginRight:".2rem", opacity:.7 }}>{schedIcon}</span>
+                      {hasAuto && (
+                        <span
+                          title={isPaused ? "Scheduler gepauzeerd — klik om te hervatten" : "Scheduler actief — klik om te pauzeren"}
+                          onClick={e => {
+                            e.stopPropagation();
+                            setPausedSchedules(prev => {
+                              const next = new Set(prev);
+                              isPaused ? next.delete(w.id) : next.add(w.id);
+                              return next;
+                            });
+                          }}
+                          style={{ fontSize:".65rem", marginRight:".15rem", cursor:"pointer",
+                            opacity: isPaused ? .4 : 1,
+                            filter: isPaused ? "grayscale(1)" : "none",
+                            transition:"all .15s" }}
+                        >{isPaused ? "⏸" : isInterval ? "🔄" : "⏱"}</span>
                       )}
+
                       <span style={{ fontFamily:"var(--mono)", fontSize:".52rem",
                         color:"var(--chrome-dim)", marginRight:".25rem", whiteSpace:"nowrap" }}>
                         {connCount}c
@@ -6524,11 +7174,11 @@ function App() {
                   <div className="add-conn"
                     style={{ borderColor:"rgba(0,229,255,.2)", color:"var(--neon-cyan)" }}
                     onClick={()=>setShowWerksetPopup(true)}>
-                    <span>≡</span> {werksets.length - 10} meer werksets…
+                    <span>≡</span> {werksets.length - 10} meer machines…
                   </div>
                 )}
 
-                {/* Laatste run info voor actieve werkset */}
+                {/* Laatste run info voor actieve tafel */}
                 {activeWerkset?.lastRun && (
                   <div style={{ fontSize:".56rem", color:"var(--chrome-dim)", padding:".2rem .35rem .05rem",
                     display:"flex", gap:".38rem", alignItems:"center", fontFamily:"var(--mono)" }}>
@@ -6545,7 +7195,7 @@ function App() {
                 <div className="add-conn"
                   style={{ borderColor:"rgba(255,149,0,.22)", color:"var(--neon-amber)" }}
                   onClick={()=>setEditWerkset({ profileId: activeProfile?.id, werkset: null })}>
-                  <span>+</span> Werkset toevoegen
+                  <span>+</span> Machine toevoegen
                 </div>
               </div>
 
@@ -6626,6 +7276,30 @@ function App() {
                       color: werksetRunning===activeWerksetId?"var(--neon-green)":"var(--neon-amber)",
                       boxShadow: werksetRunning===activeWerksetId?"0 0 18px rgba(57,255,20,.5)":"" }}>
                     {werksetRunning===activeWerksetId ? "⟳ Run" : "▶ Run"}
+                  </div>
+                </div>
+                {/* Zoom */}
+                <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between",
+                  marginTop:".55rem", padding:".4rem .1rem 0", borderTop:"1px solid rgba(200,168,75,.12)" }}>
+                  <span style={{ fontFamily:"var(--mono)", fontSize:".44rem", color:"var(--chrome-dim)",
+                    letterSpacing:".12em", textTransform:"uppercase" }}>Zoom</span>
+                  <div style={{ display:"flex", alignItems:"center", gap:".3rem" }}>
+                    <button onClick={zoomOut} disabled={ZOOM_STEPS.indexOf(zoom)===0} title="Uitzoomen"
+                      style={{ fontFamily:"var(--mono)", fontSize:".8rem", width:"1.4rem", height:"1.4rem",
+                        background:"transparent", border:"1px solid rgba(200,168,75,.3)", borderRadius:3,
+                        color: ZOOM_STEPS.indexOf(zoom)===0 ? "rgba(200,168,75,.2)" : "var(--chrome)",
+                        cursor: ZOOM_STEPS.indexOf(zoom)===0 ? "default" : "pointer",
+                        display:"flex", alignItems:"center", justifyContent:"center" }}>−</button>
+                    <span onClick={()=>setZoom(125)} title="Reset naar 100%"
+                      style={{ fontFamily:"var(--mono)", fontSize:".65rem", color:"var(--chrome-dim)",
+                        minWidth:"2.2rem", textAlign:"center", cursor:"pointer", userSelect:"none" }}>
+                      {Math.round(zoom/1.25)}%</span>
+                    <button onClick={zoomIn} disabled={ZOOM_STEPS.indexOf(zoom)===ZOOM_STEPS.length-1} title="Inzoomen"
+                      style={{ fontFamily:"var(--mono)", fontSize:".8rem", width:"1.4rem", height:"1.4rem",
+                        background:"transparent", border:"1px solid rgba(200,168,75,.3)", borderRadius:3,
+                        color: ZOOM_STEPS.indexOf(zoom)===ZOOM_STEPS.length-1 ? "rgba(200,168,75,.2)" : "var(--chrome)",
+                        cursor: ZOOM_STEPS.indexOf(zoom)===ZOOM_STEPS.length-1 ? "default" : "pointer",
+                        display:"flex", alignItems:"center", justifyContent:"center" }}>+</button>
                   </div>
                 </div>
               </div>
@@ -6745,7 +7419,18 @@ function App() {
           {config.env}.{ {production:"rest",test:"resttest",acceptance:"restaccept"}[config.envType||"production"] }.afas.online
         </div>}
         {activeConn && <div className="sbi">{activeConn.name}</div>}
-        <div className="sbi ml">AFAS DataEditor v1.0</div>
+        <div className="sbi ml">FLPR Data Editor v1.0</div>
+        {fssFolder && (
+          <div className="sbi" style={{marginLeft:".75rem", gap:".3rem"}}>
+            <div style={{width:5, height:5, borderRadius:"50%",
+              background: fssError ? "var(--neon-red)" : fssSaving ? "var(--neon-amber)" : "var(--neon-green)",
+              boxShadow: fssError ? "0 0 4px var(--neon-red)" : fssSaving ? "0 0 4px var(--neon-amber)" : "0 0 4px var(--neon-green)",
+              animation: fssSaving ? "blink 1s infinite" : "none"}} />
+            <span style={{color: fssError ? "var(--neon-red)" : "var(--chrome-dim)"}}>
+              {fssSaving ? "sync…" : fssError ? "sync fout" : fssFolder}
+            </span>
+          </div>
+        )}
         <div className="sbi" onClick={()=>setShowExport(true)}
           title="Backup exporteren / importeren"
           style={{ cursor:"pointer", color:"var(--chrome-dim)", fontSize:".6rem", padding:".15rem .4rem",
@@ -6756,12 +7441,12 @@ function App() {
         </div>
       </div>
 
-      {/* ── WERKSET OVERZICHT POPUP ── */}
+      {/* ── TAFEL OVERZICHT POPUP ── */}
       {showWerksetPopup && (
         <div className="overlay" onClick={e=>{ if(e.target===e.currentTarget) setShowWerksetPopup(false); }}>
           <div className="modal" style={{ width:520, maxHeight:"82vh" }}>
             <div className="mh">
-              <span className="mtitle">Alle werksets</span>
+              <span className="mtitle">Alle machines</span>
               <span className="mclose" onClick={()=>setShowWerksetPopup(false)}>✕</span>
             </div>
             <div className="mb" style={{ padding:".6rem .9rem", gap:".2rem" }}>
@@ -6822,9 +7507,9 @@ function App() {
             </div>
             <div className="mf" style={{ justifyContent:"space-between", alignItems:"center" }}>
               <span style={{ fontFamily:"var(--mono)", fontSize:".58rem", color:"var(--chrome-dim)",
-                letterSpacing:".06em" }}>{werksets.length} werkset{werksets.length !== 1 ? "s" : ""}</span>
+                letterSpacing:".06em" }}>{werksets.length} machine{werksets.length !== 1 ? "s" : ""}</span>
               <button className="btn btn-primary" onClick={()=>{ setShowWerksetPopup(false); setEditWerkset({ profileId: activeProfile?.id, werkset: null }); }}>
-                + Nieuwe werkset
+                + Nieuwe machine
               </button>
             </div>
           </div>
@@ -6923,6 +7608,7 @@ function App() {
       {showExport && (
         <ExportImportModal
           profiles={profiles}
+          runLog={lastRunLog}
           onImport={handleImport}
           onClose={()=>setShowExport(false)}
         />
